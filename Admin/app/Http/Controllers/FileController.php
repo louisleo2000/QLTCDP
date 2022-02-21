@@ -35,7 +35,7 @@ class FileController extends Controller
             $exten = $request->file('img')->getClientOriginalExtension();
             $fileName = $request['name'].".".$exten;
             $path = $request->file('img')->storeAs('public/childs',$fileName);
-
+            dd($request->file('img'));
             return response()->json(['success' => $path],200);
         }
     }

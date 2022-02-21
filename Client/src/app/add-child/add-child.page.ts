@@ -11,6 +11,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./add-child.page.scss'],
 })
 export class AddChildPage implements OnInit {
+  exten:string
+  selectedImage: any
+  imageUrl:string
   addChildForm: FormGroup;
   name: FormControl;
   gender: FormControl;
@@ -54,7 +57,7 @@ export class AddChildPage implements OnInit {
         Validators.required,
       ]);
 
-    this.birthday = new FormControl(format(new Date(), 'dd-MM-yyyy'),
+    this.birthday = new FormControl(format(new Date(), 'yyyy-MM-dd'),
       [
         Validators.required,
       ]);
@@ -76,7 +79,24 @@ export class AddChildPage implements OnInit {
     this.pickdate.full = value
     this.birthday.setValue(format(parseISO(value), 'yyyy-MM-dd'))
   }
+
+  onImageSelected(event) {
+    console.log(event);
+    this.selectedImage = event.target.files[0];
+    let reader = new FileReader();
+    this.exten = event.target.files[0].name.split('.').pop();
+    reader.onload = (e: any) => {
+      this.imageUrl = e.target.result;
+    };
+    reader.readAsDataURL(this.selectedImage);
+    let now = new Date()
+    this.img.setValue(this.birthday.value + now.getTime()+"."+this.exten)
+    console.log(this.img.value)
+  }
+
   onSubmit() {
+    let now = new Date()
+    this.img.setValue(this.birthday.value + now.getTime()+"."+this.exten)
     let data = this.addChildForm.value
     this.alertAndLoading.presentLoading()
     this.authService.addchild(data).subscribe(res => {

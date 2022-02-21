@@ -62,8 +62,9 @@
         </ion-radio-group>
 
         <ion-item color = "light">
-          <ion-label>Hình ảnh</ion-label>
-          <ion-input required formControlName="img" type="text"></ion-input>
+          <ion-label position="floating">Hình ảnh</ion-label>
+          <ion-input required placeholder="Upload Image" type="file" (change)="onImageSelected($event)" accept ="image/png, image/jpg, image/jpeg"></ion-input>
+          <ion-img [src]="imageUrl" style="width: 200px;height: auto;"></ion-img>
         </ion-item>
 
         <ion-item color = "light" lines="none" id="open-modal">
