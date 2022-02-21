@@ -1,0 +1,37 @@
+.g-10 {
+  margin: 10px;
+}
+.row-end-f14 {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin: 100px 10px 10px 10px;
+  font-size: 14px;
+}
+.container-input {
+  border-radius: 50px;
+}
+.back{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.container {
+  display: grid;
+  background-color: #f2f2f2;
+  border-radius: 30px;
+  margin: 10px;
+}
+.scroll {
+  height: 100%;
+}
+ion-input{
+
+  --color: #000
+
+}
+ion-item{
+  --background: rgba(255, 251, 251, 0.603);
+  --color: #000;
+}

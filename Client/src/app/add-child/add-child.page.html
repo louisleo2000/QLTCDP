@@ -1,0 +1,102 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Thêm thành viên</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color = "light">
+  <form [formGroup]="addChildForm" (ngSubmit)="onSubmit()">
+    <ion-row>
+      <ion-col size="12">
+        <ion-item color = "light">
+          <ion-label position="floating"
+            >Họ và tên <ion-text color="danger">*</ion-text></ion-label
+          >
+          <ion-input required formControlName="name" type="text"></ion-input>
+        </ion-item>
+
+        <ion-row>
+          <ion-col size="6">
+            <ion-item color = "light">
+              <ion-label position="floating">Chiều cao(cm) </ion-label>
+              <ion-input
+                required
+                formControlName="height"
+                type="number"
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="6">
+            <ion-item color = "light">
+              <ion-label position="floating">Cân nặng(kg) </ion-label>
+              <ion-input
+                required
+                formControlName="weight"
+                type="number"
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-radio-group  formControlName="gender">
+          <h5>Giới tính</h5>
+          <ion-row>
+            <ion-col size="4">
+              <ion-item color = "light" lines="none">
+                <ion-label>Nam</ion-label>
+                <ion-radio value="nam"> </ion-radio>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="4">
+              <ion-item color = "light" lines="none">
+                <ion-label>Nữ</ion-label>
+                <ion-radio style="margin-left: 10px" value="nữ"></ion-radio>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-radio-group>
+
+        <ion-item color = "light">
+          <ion-label>Hình ảnh</ion-label>
+          <ion-input required formControlName="img" type="text"></ion-input>
+        </ion-item>
+
+        <ion-item color = "light" lines="none" id="open-modal">
+          <h5>Ngày sinh</h5>
+          <ion-text slot="end">
+            {{pickdate.short}}
+            <span style="color: rgb(155, 152, 152)">(dd-MM-yyyy)</span>
+          </ion-text>
+        </ion-item>
+
+        <ion-modal trigger="open-modal">
+          <ng-template>
+            <ion-content force-overscroll="false">
+              <ion-datetime
+                #datetime
+                color="secondary"
+                [value]="pickdate.full"
+                (ionChange)="dataChange(datetime.value)"
+              ></ion-datetime>
+            </ion-content>
+          </ng-template>
+        </ion-modal>
+      </ion-col>
+    </ion-row>
+    <ion-button
+      shape="round"
+      expand="full"
+      color="secondary"
+      type="submit"
+      [disabled]="addChildForm.invalid"
+      style="margin: 20px"
+    >
+      Thêm
+    </ion-button>
+  </form>
+</ion-content>

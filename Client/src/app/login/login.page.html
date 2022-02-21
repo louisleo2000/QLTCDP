@@ -1,0 +1,47 @@
+<ion-header [translucent]="true"> </ion-header>
+
+<ion-content [fullscreen]="true" color="secondary">
+  <div class="back ion-text-center">
+    <div class="container">
+      <ion-img src="../../assets/icon/logo.png" style="width: 60%; justify-self: center;"></ion-img>
+      <ion-label style="color: black; font-weight: bold; font-size: 20px"
+        >ĐĂNG NHẬP</ion-label
+      >
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <ion-item lines="none" class="g-10 container-input">
+          <ion-label position="floating">
+            <ion-icon slot="start" name="mail"></ion-icon> Email
+          </ion-label>
+          <ion-input required formControlName="email" type="email"></ion-input>
+        </ion-item>
+
+        <ion-item lines="none" class="g-10 container-input">
+          <ion-label position="floating">
+            <ion-icon slot="start" name="lock-closed"></ion-icon>
+            Password
+          </ion-label>
+          <ion-input required formControlName="password" type="password">
+          </ion-input>
+        </ion-item>
+
+        <ion-button
+          expand="block"
+          style="margin: 40px 10px 10px 10px"
+          color="secondary"
+          type="submit"
+          shape="round"
+          [disabled]="loginForm.invalid"
+        >
+          Đăng nhập
+        </ion-button>
+      </form>
+
+      <div class="row-end-f14">
+        <ion-label color="#000">Bạn chưa có tài khoản?</ion-label>
+        <a style="margin: 0 0 10px 3px" [routerLink]="['../signup']">
+          Đăng ký ngay
+        </a>
+      </div>
+    </div>
+  </div>
+</ion-content>

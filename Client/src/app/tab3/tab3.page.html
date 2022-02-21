@@ -1,0 +1,28 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title> Cài đặt </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid fixed>
+    <ion-row class="ion-justify-content-center">
+      <ion-avatar style="height: 200px; min-width: 200px">
+        <img
+          src="https://i.pinimg.com/originals/8f/f5/a5/8ff5a5fef53633a4dfb4580dc9ee9266.jpg"
+        />
+      </ion-avatar>
+    </ion-row>
+    <h1 class="ion-text-center">{{currentUser.name}}</h1>
+    <ion-row>
+      <ion-col size="12">
+        <ion-list>
+          <ion-item (click)="logOut()">
+            <h3>Đăng xuất</h3>
+            <ion-icon slot="end" name="log-out"></ion-icon>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

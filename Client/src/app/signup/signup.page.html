@@ -1,0 +1,93 @@
+<ion-header >
+  <ion-toolbar color="secondary" >
+    <ion-title>Đăng ký </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="stack/login"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="secondary">
+  <div class="back">
+    <div class="container">
+      <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+        <div
+          style="
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+          "
+        >
+          <ion-img
+            src="../../assets/icon/logo.png"
+            style="width: 70%"
+          ></ion-img>
+          <ion-label>ĐĂNG KÝ</ion-label>
+        </div>
+        <ion-item lines="none" class="g-10 container-input">
+          <ion-label position="floating">
+            <ion-icon slot="start" name="person"></ion-icon>
+            Họ và tên (Bố/Mẹ)
+          </ion-label>
+          <ion-input required formControlName="name" type="text"> </ion-input>
+        </ion-item>
+        <ion-item lines="none" class="g-10 container-input">
+          <ion-label position="floating">
+            <ion-icon slot="start" name="mail"></ion-icon> Email
+          </ion-label>
+          <ion-input required formControlName="email" type="email"></ion-input>
+        </ion-item>
+        <ion-item lines="none" class="g-10 container-input">
+          <ion-label position="floating">
+            <ion-icon slot="start" name="lock-closed"></ion-icon>
+            Mật khẩu
+          </ion-label>
+          <ion-input required formControlName="password" type="password">
+          </ion-input>
+        </ion-item>
+        <ion-label
+          *ngIf="!password.valid && (password.dirty || password.touched)"
+          style="color: red; margin-left: 20px"
+          >Mật khẩu phải có 8 ký tự trở lên</ion-label
+        >
+        <ion-item lines="none" class="g-10 container-input">
+          <ion-label position="floating">
+            <ion-icon slot="start" name="lock-closed"></ion-icon>
+            Nhập lại mật khẩu
+          </ion-label>
+          <ion-input
+            required
+            formControlName="password_confirmation"
+            type="password"
+          >
+          </ion-input>
+        </ion-item>
+        <ion-label
+          *ngIf="!password_confirmation.valid && (password_confirmation.dirty || password_confirmation.touched)"
+          style="color: red; margin-left: 20px"
+          >Mật khẩu không trùng khớp</ion-label
+        >
+        <!-- <ion-item class="g-10 container-input">
+        <ion-label position="floating">
+          <ion-icon slot="start" name="call"></ion-icon>
+          Số điện thoại
+        </ion-label>
+        <ion-input required formControlName="tel" type="text">
+        </ion-input>
+      </ion-item> -->
+        <ion-button
+          expand="block"
+          style="margin: 40px 10px 10px 10px"
+          color="danger"
+          type="submit"
+          shape="round"
+          [disabled]="signupForm.invalid"
+        >
+          Đăng ký
+        </ion-button>
+      </form>
+    </div>
+  </div>
+</ion-content>
