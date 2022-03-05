@@ -31,7 +31,7 @@
                   {{item.age.year}} tuổi
                 </ion-card-subtitle>
                 <ion-card-subtitle
-                  *ngIf="item.age.year == 0"
+                  *ngIf="item.age.year > 0 && item.age.month > 0"
                   class="text-start"
                 >
                   {{item.age.month}} tháng
@@ -49,7 +49,7 @@
         <ion-card-content style="display: grid" [routerLink]="['/child-details/'+item.id]">
           <h1>0123819203810</h1>
           <ion-img
-            src="http://dangkynhanhieuonline.com/upload/news/2019/10/21/logo_msmv.jpg"
+            src="https://vietluat.vn/wp-content/uploads/2019/10/cap-ma-vach-ma-so-800x283.png"
             style="width: auto; height: 70%; justify-self: center"
           ></ion-img>
         </ion-card-content>

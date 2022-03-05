@@ -91,15 +91,22 @@ export class AddChildPage implements OnInit {
     reader.readAsDataURL(this.selectedImage);
     let now = new Date()
     this.img.setValue(this.birthday.value + now.getTime()+"."+this.exten)
-    console.log(this.img.value)
+    // console.log(this.img.value)
   }
 
   onSubmit() {
     let now = new Date()
     this.img.setValue(this.birthday.value + now.getTime()+"."+this.exten)
-    let data = this.addChildForm.value
+    let filedata = new FormData();
+    filedata.append('name',this.addChildForm.value.name);
+    filedata.append('img',this.selectedImage,this.img.value);
+    filedata.append('gender',this.addChildForm.value.gender);
+    filedata.append('weight',this.addChildForm.value.weight);
+    filedata.append('height',this.addChildForm.value.height);
+    filedata.append('birthday',this.addChildForm.value.birthday);
+
     this.alertAndLoading.presentLoading()
-    this.authService.addchild(data).subscribe(res => {
+    this.authService.addchild(filedata).subscribe(res => {
       if (res.success) {
         this.alertAndLoading.dismissLoadling()
         this.alertAndLoading.presentAlert('Thêm thành công')

@@ -64,8 +64,8 @@ export class AuthService {
     this.router.navigate([''])
   }
 
-  addchild(postData: any): Observable<any> {
-    postData.parent_id = this.userData.value.id
+  addchild(postData: FormData): Observable<any> {
+    postData.append('parent_id', this.userData.value.id)
     return this.httpService.post('add-child', postData)
   }
 

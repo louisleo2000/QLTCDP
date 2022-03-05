@@ -30,13 +30,20 @@ class FileController extends Controller
             'img' => ['required'],
 
         ]);
-        if($request->hasFile('img'))
-        {
-            $exten = $request->file('img')->getClientOriginalExtension();
-            $fileName = $request['name'].".".$exten;
-            $path = $request->file('img')->storeAs('public/childs',$fileName);
-            dd($request->file('img'));
+    
+
+        if ($request->hasFile('img')) {
+            //get name and port of server
+            $serverName = "http://" . $_SERVER['SERVER_NAME'] . ":" . $_SERVER['SERVER_PORT'];
+            //get file name
+            $fileName = $request['name'] . "." . $request->file('img')->getClientOriginalExtension();
+            //save img in storage public/img
+            $request->file('img')->storeAs('public/img', $fileName);
+            $path = $serverName . "/storage" . '/img/' . $fileName;
             return response()->json(['success' => $path],200);
+        }
+        else{
+            return response()->json(['error' => 'File not found'],404);
         }
     }
 

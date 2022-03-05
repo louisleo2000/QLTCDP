@@ -6,6 +6,7 @@ use App\Models\Child;
 use App\Http\Requests\StoreChildRequest;
 use App\Http\Requests\UpdateChildRequest;
 use App\Models\User;
+use DateTime;
 use Illuminate\Http\Request;
 
 class ChildController extends Controller
@@ -30,6 +31,8 @@ class ChildController extends Controller
     public function create(Request $request)
     {
         //
+        $d1 = new DateTime();
+        $d1 =$d1->format('U');
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'parent_id'=> ['required'],
@@ -37,17 +40,31 @@ class ChildController extends Controller
             'weight' => ['required'],
             'height'=> ['required'],
             'birthday'=> ['required']
-
-
         ]);
-        if($request->img)
-        {
-            $img  = $request->img;
+        if ($request->hasFile('img')) {
+            //get name and port of server
+            $serverName = "http://" . $_SERVER['SERVER_NAME'] . ":" . $_SERVER['SERVER_PORT'];
+            //get file name
+            $fileName = $request['name'] .$request['birthday'] .$d1. "." . $request->file('img')->getClientOriginalExtension();
+            //save img in storage public/img
+            $request->file('img')->storeAs('public/img', $fileName);
+            $path = $serverName . "/storage" . '/img/' . $fileName;
+            // return response()->json(['success' => $path],200);
+            $img = $path;
         }
-        else
-        {
+        else{
+            // return response()->json(['error' => 'File not found'],404);
             $img = null;
         }
+
+        // if($request->img)
+        // {
+        //     $img  = $request->img;
+        // }
+        // else
+        // {
+        //     $img = null;
+        // }
         $child = Child::create([
             'name' => $request->name,
             'parent_id'=> $request->parent_id,

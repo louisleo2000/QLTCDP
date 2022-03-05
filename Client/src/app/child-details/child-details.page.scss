@@ -1,6 +1,22 @@
 .icon {
   font-size: 30px;
-
+  color: rgb(68, 68, 68);
+}
+.icon-danger{
+  font-size: 30px;
+  color: rgb(252, 0, 0);
+}
+.icon-success{
+  font-size: 30px;
+  color: rgb(0, 255, 128);
+}
+.icon-primary{
+  font-size: 30px;
+  color: rgb(41, 133, 238);
+}
+.icon-warning{
+  font-size: 30px;
+  color: rgb(238, 218, 41);
 }
 ion-card{
   border-radius: 25px;
