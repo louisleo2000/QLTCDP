@@ -11,7 +11,7 @@
   <ion-grid>
     <ion-row>
       <ion-col size="3" class="ion-no-padding">
-        <ion-avatar style="border: 3px solid white; width: 70px;height: 70px;">
+        <ion-avatar style="border: 3px solid white; width: 70px; height: 70px">
           <img [src]="currentChild.img" />
         </ion-avatar>
       </ion-col>
@@ -26,7 +26,7 @@
       </ion-col>
     </ion-row>
     <div>
-      <ion-card style="background-color: white;">
+      <ion-card class="bg-white">
         <ion-row class="ion-justify-content-center">
           <ion-col size="4" class="ion-text-center">
             <ion-icon name="today" class="icon"></ion-icon>
@@ -44,6 +44,36 @@
             <h4>{{currentChild.height}} cm</h4>
           </ion-col>
         </ion-row>
+      </ion-card>
+
+      <ion-card class="bg-white">
+        <ion-list>
+          <ion-list-header>
+            <ion-col size="9" >
+              <h3>Tiêm chủng</h3>
+            </ion-col>
+            <ion-col size="4">
+              <a>
+                Lịch sử tiêm
+              </a>
+            </ion-col>
+          </ion-list-header>
+          <ion-item lines="none" shape="round" color="success">
+            <ion-label>Lao</ion-label>
+            <ion-badge color="warning">1</ion-badge>
+            <ion-badge color="secondary">2</ion-badge>
+          </ion-item>
+          <ion-item lines="none" shape="round" color="warning">
+            <ion-label>Viêm gan B</ion-label>
+            <ion-badge color="success">1</ion-badge>
+            <ion-badge color="secondary">2</ion-badge>
+          </ion-item>
+          <ion-item lines="none" shape="round" color="danger">
+            <ion-label>Bạch Hầu</ion-label>
+            <ion-badge color="warning">1</ion-badge>
+            <ion-badge color="secondary">2</ion-badge>
+          </ion-item>
+        </ion-list>
       </ion-card>
     </div>
   </ion-grid>
