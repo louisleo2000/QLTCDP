@@ -1,7 +1,8 @@
 {
   "name": "QLTC",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
   "type": "angular",
   "id": "1d96fc60"

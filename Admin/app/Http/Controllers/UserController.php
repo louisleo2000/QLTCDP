@@ -56,7 +56,7 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'img' => 'https://p.kindpng.com/picc/s/451-4517876_default-profile-hd-png-download.png'
+            'img' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGU08XQH3aJxq-OT9Uhtl7oy4JzEHB1oH_wVNkPr06tDlndqzEk6arx30Q369ekS04Gwk&usqp=CAU'
         ]);
         event(new Registered($user));
         Auth::login($user);

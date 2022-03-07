@@ -9,7 +9,8 @@
     <ion-row class="ion-justify-content-center">
       <ion-avatar style="height: 200px; min-width: 200px">
         <img
-          src= {{currentUser.img}}
+          [src]= "currentUser.img"
+          alt="avatar"
         />
       </ion-avatar>
     </ion-row>

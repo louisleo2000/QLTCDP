@@ -1,5 +1,5 @@
-<ion-header >
-  <ion-toolbar color="secondary" >
+<ion-header>
+  <ion-toolbar color="secondary">
     <ion-title>Đăng ký </ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="stack/login"></ion-back-button>
@@ -31,14 +31,24 @@
             <ion-icon slot="start" name="person"></ion-icon>
             Họ và tên (Bố/Mẹ)
           </ion-label>
-          <ion-input required formControlName="name" type="text"> </ion-input>
+          <ion-input required formControlName="name" type="text" (change)="onChange($event)"> </ion-input>
         </ion-item>
+        <ion-label
+          *ngIf="this.name.invalid && this.name.touched"
+          class="error-message"
+          >Tên không được để trống</ion-label
+        >
         <ion-item lines="none" class="g-10 container-input">
           <ion-label position="floating">
             <ion-icon slot="start" name="mail"></ion-icon> Email
           </ion-label>
           <ion-input required formControlName="email" type="email"></ion-input>
         </ion-item>
+        <ion-label
+        *ngIf="this.email.invalid && this.email.touched"
+        class="error-message"
+        >Email không đúng định dạng</ion-label
+      >
         <ion-item lines="none" class="g-10 container-input">
           <ion-label position="floating">
             <ion-icon slot="start" name="lock-closed"></ion-icon>
@@ -49,7 +59,7 @@
         </ion-item>
         <ion-label
           *ngIf="!password.valid && (password.dirty || password.touched)"
-          style="color: red; margin-left: 20px"
+          class="error-message"
           >Mật khẩu phải có 8 ký tự trở lên</ion-label
         >
         <ion-item lines="none" class="g-10 container-input">
@@ -66,7 +76,7 @@
         </ion-item>
         <ion-label
           *ngIf="!password_confirmation.valid && (password_confirmation.dirty || password_confirmation.touched)"
-          style="color: red; margin-left: 20px"
+          class="error-message"
           >Mật khẩu không trùng khớp</ion-label
         >
         <!-- <ion-item class="g-10 container-input">

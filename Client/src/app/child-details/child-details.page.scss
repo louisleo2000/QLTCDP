@@ -2,50 +2,59 @@
   font-size: 30px;
   color: rgb(68, 68, 68);
 }
-.icon-danger{
+.icon-danger {
   font-size: 30px;
   color: rgb(252, 0, 0);
 }
-.icon-success{
+.icon-success {
   font-size: 30px;
   color: rgb(0, 255, 128);
 }
-.icon-primary{
+.icon-primary {
   font-size: 30px;
   color: rgb(41, 133, 238);
 }
-.icon-warning{
+.icon-warning {
   font-size: 30px;
   color: rgb(238, 218, 41);
 }
-ion-card{
+ion-card {
   border-radius: 25px;
   padding: 5px;
 }
-h4{
-  color: var(--ion-color-secondary);;
+h4 {
+  color: var(--ion-color-secondary);
 }
-.bg-white{
-  background-color: white
+.bg-white {
+  background-color: white;
 }
-ion-item{
+ion-item {
   border-radius: 25px;
   margin-top: 5px;
 }
-ion-badge{
+ion-badge {
   padding: 7px 10px 7px 10px;
   border-radius: 100%;
   margin-right: 3px;
 }
-h3{
+h3 {
   font-weight: bolder;
   margin-top: 0px;
+  color: black;
 }
-ion-list-header{
+ion-list-header {
   margin-bottom: 10px;
   margin-top: 5px;
 }
-a{
+a {
   margin: 0 0 10px 3px;
   color: var(--ion-color-secondary);
+}
+.avatar {
+  border: 3px solid white;
+  width: 70px;
+  height: 70px;
+}
+.item.sc-ion-label-md-hl,.item.sc-ion-label-md-h{
+  color: white
 }

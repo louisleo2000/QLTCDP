@@ -63,7 +63,7 @@
 
         <ion-item color = "light">
           <ion-label position="floating">Hình ảnh</ion-label>
-          <ion-input required placeholder="Upload Image" type="file" (change)="onImageSelected($event)" accept ="image/png, image/jpg, image/jpeg"></ion-input>
+          <ion-input required placeholder="Upload Image" type="file" (change)="onImageSelected($event)" accept ="image/*" capture="environment"></ion-input>
           <ion-img [src]="imageUrl" style="width: 200px;height: auto;"></ion-img>
         </ion-item>
 

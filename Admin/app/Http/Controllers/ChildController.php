@@ -57,14 +57,6 @@ class ChildController extends Controller
             $img = null;
         }
 
-        // if($request->img)
-        // {
-        //     $img  = $request->img;
-        // }
-        // else
-        // {
-        //     $img = null;
-        // }
         $child = Child::create([
             'name' => $request->name,
             'parent_id'=> $request->parent_id,
