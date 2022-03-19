@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  // apiURL:"http://127.0.0.1:8000/api/"
-  apiURL:"http://3b6c-42-114-70-101.ngrok.io/api/"
+  apiURL:"http://127.0.0.1:8000/api/"
+  // apiURL:"http://3b6c-42-114-70-101.ngrok.io/api/"
 };
 
 /*
