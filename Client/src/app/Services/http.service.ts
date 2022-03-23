@@ -15,9 +15,12 @@ export class HttpService {
     const url = environment.apiURL + serviceName
     return this.http.post(url,(data),options)
   }
-   get(serviceName: string){
-
+   get(serviceName: string, token: string) {
+    const headers = new HttpHeaders({
+      'Content-Type':  'application/json',
+      Authorization: 'Bearer ' + token
+    })   
     const url = environment.apiURL + serviceName
-      return  this.http.get(url)
+      return  this.http.get(url,{headers:headers})
   }
 }

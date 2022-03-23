@@ -21,22 +21,23 @@ export class Tab1Page {
   }
   ngOnInit() {
     this.authService.childs.subscribe((res) => {
-      res.forEach((child) => {
-        // console.log(child);
-        if (child != null) {
-          if (
-            child.img.includes('http://127.0.0.1:8000') &&
-            environment.apiURL != 'http://localhost:8000/api/'
-          ) {
-            var re = /http\:\/\/127\.0\.0\.1\:8000/gi;
-            child.img = child.img.replace(re, environment.apiURL.substring(0,environment.apiURL.length-5));
-            console.log(child.img);
-          }
-        }
-      });
+      // res.forEach((child) => {
+      //   console.log(child);
+      //   if (child != null) {
+      //     if (
+      //       child.img.includes('http://127.0.0.1:8000') &&
+      //       environment.apiURL != 'http://localhost:8000/api/v1/'
+      //     ) {
+      //       var re = /http\:\/\/127\.0\.0\.1\:8000/gi;
+      //       child.img = child.img.replace(re, environment.apiURL.substring(0,environment.apiURL.length-5));
+      //       console.log(child.img);
+      //     }
+      //   }
+      // });
       this.childs = res;
-      console.log(this.childs);
+      // console.log(this.childs);
     });
+    // this.childs = []
   }
 
   add() {

@@ -23,10 +23,10 @@ class CreateChildrenTable extends Migration
             $table->float('height');
             $table->date('birthday');
             $table->timestamps();
-            $table->foreign('parent_id')
-            ->references('id')->on('users')
-            ->onDelete('cascade')
-            ->onUpdate('cascade');
+            // $table->foreign('parent_id')
+            // ->references('id')->on('users')
+            // ->onDelete('cascade')
+            // ->onUpdate('cascade');
         });
     }
 

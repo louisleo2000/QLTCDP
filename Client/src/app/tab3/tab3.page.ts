@@ -20,12 +20,13 @@ export class Tab3Page {
   }
   ngOnInit() {
     this.authService.userData.subscribe(res =>{
-      var re = /http\:\/\/127\.0\.0\.1\:8000/gi;
-      if(res && environment.apiURL != 'http://localhost:8000/api/'){
-        res.img = res.img.replace(re, environment.apiURL.substring(0,environment.apiURL.length-5))
-      }
+      // var re = /http\:\/\/127\.0\.0\.1\:8000/gi;
+      // if(res && environment.apiURL != 'http://127.0.0.1:8000/api/v1/'){
+      //   res.img = res.img.replace(re, environment.apiURL.substring(0,environment.apiURL.length-5))
+      // }
       this.currentUser = res
-      console.log(res)
+      // console.log("res: ",res)
+
     })
   }
 }

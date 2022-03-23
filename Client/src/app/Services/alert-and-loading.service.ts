@@ -23,6 +23,7 @@ export class AlertAndLoadingService {
   async presentLoading() {
     this.isLoading = await this.loadingController.create({
       message: 'Đợi một chút...',
+      duration: 2000
     });
     this.isLoading.present();
   }

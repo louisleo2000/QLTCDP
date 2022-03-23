@@ -16,16 +16,20 @@ export class AuthService {
   childs = new BehaviorSubject([])
   constructor(private httpService: HttpService, private storageService: StorageService, private router: Router, private alertAndLoading: AlertAndLoadingService) { }
   async getUserData() {
-    let res = await this.storageService.get(AuthConstants.AUTH)
-    this.loadUser(res.id)
-    this.userData.next(res)
-    this.getchild()
+    let user = await this.storageService.get(AuthConstants.AUTH)
+    let token = await this.storageService.get('token')
+    this.loadUser(token)
+    this.userData.next(user)
+    // console.log(token)
+    this.getchild(token)
   }
   login(postData: any) {
-    this.httpService.post('login', postData).subscribe(async (res: any) => {
+    this.httpService.post('auth/login', postData).subscribe(async (res: any) => {
       if (res.success) {
-        this.loadUser(res.id)
-        await this.storageService.store(AuthConstants.AUTH, res.success)
+        // console.log(res.success)
+        this.loadUser(res.token)
+        await this.storageService.store('token', res.token)
+        // await this.storageService.store(AuthConstants.AUTH, res.success)
         this.router.navigate(['tabs'])
         this.alertAndLoading.dismissLoadling()
       }
@@ -40,7 +44,7 @@ export class AuthService {
           this.alertAndLoading.dismissLoadling()
           this.alertAndLoading.presentAlert("Không thể kết nối đến server.Hãy kiểm tra lại kết nối của bạn!");
 
-        } else if (error.status == 422) {
+        } else if (error.status == 422 || error.status == 401) {
           this.alertAndLoading.dismissLoadling()
           console.log('Mật khẩu hoặc tài khoản không chính xác')
           this.alertAndLoading.presentAlert("Mật khẩu hoặc tài khoản không chính xác");
@@ -54,7 +58,7 @@ export class AuthService {
       })
   }
   signUp(postData: any): Observable<any> {
-    return this.httpService.post('signup', postData)
+    return this.httpService.post('auth/register', postData)
   }
 
   async logOut() {
@@ -66,14 +70,15 @@ export class AuthService {
 
   addchild(postData: FormData): Observable<any> {
     postData.append('parent_id', this.userData.value.id)
-    return this.httpService.post('add-child', postData)
+    return this.httpService.post('child/add', postData)
   }
 
-  async getchild() {
+  async getchild(token) {
     if (this.userData.value != null) {
       let childs: any
-      let url = 'my-child/' + this.userData.value.id
-      this.httpService.get(url).subscribe(async res => {
+      let url = 'child/my-child'
+      this.httpService.get(url,token).subscribe(async res => {
+        // console.log(res)
         childs = res
         if (childs) {
           childs.forEach(e => {
@@ -106,13 +111,13 @@ export class AuthService {
     }
   }
 
-  async loadUser(id) {
-    let url = 'show-user/' + id
-    this.httpService.get(url).subscribe(async res => {
-
-      if (res) {
-        this.userData.next(res)
-        await this.storageService.store(AuthConstants.AUTH, res)
+  async loadUser(token) {
+    let url = 'auth/me'
+    this.httpService.get(url,token).subscribe(async (res:any) => {
+      if (res.success) {
+        // console.log(res.success)
+        this.userData.next(res.success)
+        await this.storageService.store(AuthConstants.AUTH, res.success)
         this.alertAndLoading.dismissLoadling()
         return true
       }

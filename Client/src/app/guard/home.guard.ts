@@ -13,7 +13,7 @@ export class HomeGuard implements CanActivate {
   constructor(public storageService: StorageService, private router: Router) { }
   async getStorage() {
     try {
-      let data = await this.storageService.get(AuthConstants.AUTH)
+      let data = await this.storageService.get('token')
       if (data) {
         return true
       }
