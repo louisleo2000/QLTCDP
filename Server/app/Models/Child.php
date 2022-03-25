@@ -14,8 +14,10 @@ class Child extends Model
         'gender',
         'weight',
         'height',
-        'birthday',
-        'img'
+        'dob',
+        'img',
+        'health_nsurance_id'
+
     ];
     public function parent()
     {

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateChildrenTable extends Migration
+class CreateParentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,20 +13,19 @@ class CreateChildrenTable extends Migration
      */
     public function up()
     {
-        Schema::create('children', function (Blueprint $table) {
+        Schema::create('parents', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('parent_id')->unsigned();
-            $table->string('name');
+            $table->integer('user_id')->unsigned();
             $table->string('gender')->default('nam');
+            $table->string('citizen_id')->nullable();
             $table->string('img')->nullable();
-            $table->float('weight');
-            $table->float('height');
-            $table->date('birthday');
+            $table->string('tel')->nullable();
+            $table->string('adress')->nullable();
             $table->timestamps();
-            // $table->foreign('parent_id')
-            // ->references('id')->on('users')
-            // ->onDelete('cascade')
-            // ->onUpdate('cascade');
+            $table->foreign('user_id')
+            ->references('id')->on('users')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
         });
     }
 
@@ -37,6 +36,6 @@ class CreateChildrenTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('children');
+        Schema::dropIfExists('parents');
     }
 }

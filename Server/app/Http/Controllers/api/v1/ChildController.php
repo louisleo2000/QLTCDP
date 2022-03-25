@@ -38,13 +38,14 @@ class ChildController extends Controller
             'gender' => ['required'],
             'weight' => ['required'],
             'height'=> ['required'],
-            'birthday'=> ['required']
+            'dob'=> ['required'],
+            'health_nsurance_id'=> ['required']
         ]);
         if ($request->hasFile('img')) {
             //get name and port of server
             $serverName = "http://" . $_SERVER['SERVER_NAME'] . ":" . $_SERVER['SERVER_PORT'];
             //get file name
-            $fileName = $request['name'] .$request['birthday'] .$d1. "." . $request->file('img')->getClientOriginalExtension();
+            $fileName = $request['name'] .$request['dob'] .$d1. "." . $request->file('img')->getClientOriginalExtension();
             //save img in storage public/img
             $request->file('img')->storeAs('public/img', $fileName);
             $path = $serverName . "/storage" . '/img/' . $fileName;
@@ -62,8 +63,9 @@ class ChildController extends Controller
             'gender'=>  $request->gender,
             'weight' => $request->weight,
             'height'=> $request->height,
-            'birthday'=> $request->birthday,
-            'img' => $img
+            'dob'=> $request->dob,
+            'img' => $img,
+            'health_nsurance_id' => $request->health_nsurance_id
         ]);
 
         return response()->json(['success' =>$child ],200);

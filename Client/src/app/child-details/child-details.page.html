@@ -21,7 +21,7 @@
           <ion-icon
             [name]="currentChild.gender =='nam'?'male':'female'"
           ></ion-icon>
-          {{currentChild.birthday}}
+          {{currentChild.dob +' | '+ currentChild.health_nsurance_id }}
         </ion-label>
       </ion-col>
     </ion-row>
@@ -31,7 +31,7 @@
           <ion-col size="4" class="ion-text-center">
             <ion-icon name="today" class="icon"></ion-icon>
             <h5>Ngày sinh</h5>
-            <h4>{{currentChild.birthday}}</h4>
+            <h4>{{currentChild.dob}}</h4>
           </ion-col>
           <ion-col size="4" class="ion-text-center">
             <ion-icon name="scale" class="icon"></ion-icon>

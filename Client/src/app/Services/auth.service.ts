@@ -82,9 +82,9 @@ export class AuthService {
         childs = res
         if (childs) {
           childs.forEach(e => {
-            if (e.birthday != undefined) {
-              e.age = this.calAge(new Date(e.birthday))
-              e.birthday = format(new Date(e.birthday), 'dd/MM/yyyy')
+            if (e.dob != undefined) {
+              e.age = this.calAge(new Date(e.dob))
+              e.dob = format(new Date(e.dob), 'dd/MM/yyyy')
             }
           });
           this.childs.next(childs)

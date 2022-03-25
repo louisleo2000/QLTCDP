@@ -12,50 +12,62 @@
 
 <ion-content [fullscreen]="true">
   <ion-slides pager="true" class="ion-padding">
-   <ng-container *ngIf="childs.length >0">
-    <ion-slide *ngFor="let item of childs">
-      <ion-card>
-        <div
-          class="container-img"
-          [routerLink]="['/child-details/'+item.id]"
-          routerLinkActive="router-link-active"
-        >
-        
-          <img
-            [src]="item.img? item.img:'https://vidafeels.com/wp-content/uploads/Avatar.jpg'"
-          />
-          <div style="position: relative">
-            <div class="text-block">
-              <ion-card-header>
-                <h1 class="text-start">{{item.name}}</h1>
-                <ion-card-subtitle *ngIf="item.age.year >0" class="text-start">
-                  {{item.age.year}} tuổi
-                </ion-card-subtitle>
-                <ion-card-subtitle
-                  *ngIf="item.age.year > 0 && item.age.month > 0"
-                  class="text-start"
-                >
-                  {{item.age.month}} tháng
-                </ion-card-subtitle>
-                <ion-card-subtitle
-                  *ngIf="item.age.month == 0 && item.age.year == 0"
-                  class="text-start"
-                >
-                  {{item.age.day}} ngày
-                </ion-card-subtitle>
-              </ion-card-header>
+    <ng-container *ngIf="childs.length >0">
+      <ion-slide *ngFor="let item of childs">
+        <ion-card>
+          <div
+            class="container-img"
+            [routerLink]="['/child-details/'+item.id]"
+            routerLinkActive="router-link-active"
+          >
+            <img
+              [src]="item.img? item.img:'https://vidafeels.com/wp-content/uploads/Avatar.jpg'"
+            />
+            <div style="position: relative">
+              <div class="text-block">
+                <ion-card-header>
+                  <h1 class="text-start">{{item.name}}</h1>
+                  <ion-card-subtitle
+                    *ngIf="item.age.year >0"
+                    class="text-start"
+                  >
+                    {{item.age.year}} tuổi
+                  </ion-card-subtitle>
+                  <ion-card-subtitle
+                    *ngIf="item.age.year > 0 && item.age.month > 0"
+                    class="text-start"
+                  >
+                    {{item.age.month}} tháng
+                  </ion-card-subtitle>
+                  <ion-card-subtitle
+                    *ngIf="item.age.month == 0 && item.age.year == 0"
+                    class="text-start"
+                  >
+                    {{item.age.day}} ngày
+                  </ion-card-subtitle>
+                </ion-card-header>
+              </div>
             </div>
           </div>
-        </div>
-        <ion-card-content style="display: grid" [routerLink]="['/child-details/'+item.id]">
-          <h1>0123819203810</h1>
-          <ion-img
+          <ion-card-content
+            style="display: grid"
+            [routerLink]="['/child-details/'+item.id]"
+          >
+            <!-- <ion-img
             src="https://vietluat.vn/wp-content/uploads/2019/10/cap-ma-vach-ma-so-800x283.png"
             style="width: auto; height: 70%; justify-self: center"
-          ></ion-img>
-        </ion-card-content>
-      </ion-card>
-    </ion-slide>
-   </ng-container>
+          ></ion-img> -->
+            <ngx-barcode6
+              [bc-format]="'MSI'"
+              [bc-value]="'12345678901231'"
+              [bc-width]="1.5"
+              [bc-display-value]="true"
+              [bc-font-size]="20"
+            >
+            </ngx-barcode6>
+          </ion-card-content>
+        </ion-card>
+      </ion-slide>
+    </ng-container>
   </ion-slides>
 </ion-content>

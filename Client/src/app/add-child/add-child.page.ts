@@ -20,7 +20,8 @@ export class AddChildPage implements OnInit {
   img: FormControl;
   weight: FormControl;
   height: FormControl;
-  birthday: FormControl;
+  dob: FormControl;
+  health_nsurance_id: FormControl;
   pickdate = {
     'short':format(new Date(), 'dd-MM-yyyy') ,
     'full' :format(new Date(), 'yyyy-MM-dd') + 'T09:00:00.000Z'
@@ -34,7 +35,8 @@ export class AddChildPage implements OnInit {
     this.name = new FormControl('',
       [
         Validators.required,
-        Validators.minLength(2)
+        Validators.minLength(2),
+        Validators.pattern(/[\S]/)
       ]);
 
     this.gender = new FormControl('nam',
@@ -57,9 +59,15 @@ export class AddChildPage implements OnInit {
         Validators.required,
       ]);
 
-    this.birthday = new FormControl(format(new Date(), 'yyyy-MM-dd'),
+    this.dob = new FormControl(format(new Date(), 'yyyy-MM-dd'),
       [
         Validators.required,
+      ]);
+    this.health_nsurance_id = new FormControl('',
+      [
+        Validators.required,
+        Validators.minLength(15),
+        Validators.pattern(/[\S]/)
       ]);
 
     this.addChildForm = formBuilder.group({
@@ -68,7 +76,8 @@ export class AddChildPage implements OnInit {
       img: this.img,
       weight: this.weight,
       height: this.height,
-      birthday: this.birthday,
+      dob: this.dob,
+      health_nsurance_id: this.health_nsurance_id
     });
   }
 
@@ -77,7 +86,12 @@ export class AddChildPage implements OnInit {
   dataChange(value) {
     this.pickdate.short = format(parseISO(value), 'dd-MM-yyyy')
     this.pickdate.full = value
-    this.birthday.setValue(format(parseISO(value), 'yyyy-MM-dd'))
+    this.dob.setValue(format(parseISO(value), 'yyyy-MM-dd'))
+  }
+
+  onChange($event:any) {
+    $event.target.value = $event.target.value.trim();
+    
   }
 
   onImageSelected(event) {
@@ -90,20 +104,21 @@ export class AddChildPage implements OnInit {
     };
     reader.readAsDataURL(this.selectedImage);
     let now = new Date()
-    this.img.setValue(this.birthday.value + now.getTime()+"."+this.exten)
+    this.img.setValue(this.dob.value + now.getTime()+"."+this.exten)
     // console.log(this.img.value)
   }
 
   onSubmit() {
     let now = new Date()
-    this.img.setValue(this.birthday.value + now.getTime()+"."+this.exten)
+    this.img.setValue(this.dob.value + now.getTime()+"."+this.exten)
     let filedata = new FormData();
     filedata.append('name',this.addChildForm.value.name);
     filedata.append('img',this.selectedImage,this.img.value);
     filedata.append('gender',this.addChildForm.value.gender);
     filedata.append('weight',this.addChildForm.value.weight);
     filedata.append('height',this.addChildForm.value.height);
-    filedata.append('birthday',this.addChildForm.value.birthday);
+    filedata.append('dob',this.addChildForm.value.dob);
+    filedata.append('health_nsurance_id',this.addChildForm.value.health_nsurance_id);
 
     this.alertAndLoading.presentLoading()
     this.authService.addchild(filedata).subscribe(res => {

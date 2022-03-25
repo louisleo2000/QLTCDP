@@ -15,9 +15,14 @@
           <ion-label position="floating"
             >Họ và tên <ion-text color="danger">*</ion-text></ion-label
           >
-          <ion-input required formControlName="name" type="text"></ion-input>
+          <ion-input required formControlName="name" type="text" (change)="onChange($event)"></ion-input>
         </ion-item>
-
+        <ion-item color = "light">
+          <ion-label position="floating"
+            >Số bảo hiểm y tế <ion-text color="danger">*</ion-text></ion-label
+          >
+          <ion-input required formControlName="health_nsurance_id" type="text" (change)="onChange($event)"></ion-input>
+        </ion-item>
         <ion-row>
           <ion-col size="6">
             <ion-item color = "light">

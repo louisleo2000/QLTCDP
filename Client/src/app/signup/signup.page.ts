@@ -95,6 +95,7 @@ export class SignupPage implements OnInit {
 
   onSubmit() {
     let data = this.signupForm.value;
+    data.role = 3;
     this.alertAndLoading.presentLoading();
     this.authService.signUp(data).subscribe(
       (res) => {

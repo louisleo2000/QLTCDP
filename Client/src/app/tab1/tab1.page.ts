@@ -4,12 +4,14 @@ import { environment } from 'src/environments/environment';
 import { AuthService } from './../Services/auth.service';
 import { HttpService } from './../Services/http.service';
 
+declare function initBarcode():any
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
 })
 export class Tab1Page {
+
   childs;
   constructor(
     public authService: AuthService,
@@ -35,6 +37,7 @@ export class Tab1Page {
       //   }
       // });
       this.childs = res;
+      initBarcode();
       // console.log(this.childs);
     });
     // this.childs = []
