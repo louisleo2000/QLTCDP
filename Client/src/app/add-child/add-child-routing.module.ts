@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { ChildDetailsGuard } from '../guard/child-details.guard';
 import { HomeGuard } from '../guard/home.guard';
 
 import { AddChildPage } from './add-child.page';

@@ -34,7 +34,6 @@ class ChildController extends Controller
         $d1 =$d1->format('U');
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'parent_id'=> ['required'],
             'gender' => ['required'],
             'weight' => ['required'],
             'height'=> ['required'],
@@ -59,7 +58,7 @@ class ChildController extends Controller
 
         $child = Child::create([
             'name' => $request->name,
-            'parent_id'=> $request->parent_id,
+            'parent_id'=> Auth::user()->id,
             'gender'=>  $request->gender,
             'weight' => $request->weight,
             'height'=> $request->height,

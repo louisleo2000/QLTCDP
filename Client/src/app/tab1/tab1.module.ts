@@ -4,9 +4,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Tab1Page } from './tab1.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
-
 import { Tab1PageRoutingModule } from './tab1-routing.module';
-import { NgxBarcode6Module } from 'ngx-barcode6';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
+
 @NgModule({
   imports: [
     IonicModule,
@@ -14,7 +14,7 @@ import { NgxBarcode6Module } from 'ngx-barcode6';
     FormsModule,
     ExploreContainerComponentModule,
     Tab1PageRoutingModule,
-    NgxBarcode6Module
+    LazyLoadImageModule
   ],
   declarations: [Tab1Page]
 })

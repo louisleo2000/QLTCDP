@@ -4,8 +4,10 @@
 
 export const environment = {
   production: false,
-  apiURL:"http://127.0.0.1:8000/api/v1/"
-  // apiURL:"http://3b6c-42-114-70-101.ngrok.io/api/"
+  // localmode: true,
+  // apiURL:"http://127.0.0.1:8000/api/v1/",
+  apiURL:  "http://qltc.ngrok.io/api/v1/",
+  host: "http://qltc.ngrok.io"
 };
 
 /*

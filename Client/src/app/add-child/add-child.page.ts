@@ -82,6 +82,9 @@ export class AddChildPage implements OnInit {
   }
 
   ngOnInit() {
+    if(this.authService.userData.value == null){
+      this.router.navigate(['/tabs'])
+    }
   }
   dataChange(value) {
     this.pickdate.short = format(parseISO(value), 'dd-MM-yyyy')
@@ -121,10 +124,12 @@ export class AddChildPage implements OnInit {
     filedata.append('health_nsurance_id',this.addChildForm.value.health_nsurance_id);
 
     this.alertAndLoading.presentLoading()
-    this.authService.addchild(filedata).subscribe(res => {
+    this.authService.addchild(filedata,this.authService.currentToken.getValue()).subscribe(res => {
       if (res.success) {
         this.alertAndLoading.dismissLoadling()
         this.alertAndLoading.presentAlert('Thêm thành công')
+        //reload formcontrol
+        this.addChildForm.reset()
         this.router.navigate(['/tabs'])
       }
       else {

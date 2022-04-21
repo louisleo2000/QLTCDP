@@ -20,9 +20,7 @@
             [routerLink]="['/child-details/'+item.id]"
             routerLinkActive="router-link-active"
           >
-            <img
-              [src]="item.img? item.img:'https://vidafeels.com/wp-content/uploads/Avatar.jpg'"
-            />
+            <img [defaultImage]="defaultImage" [lazyLoad]="item.img" />
             <div style="position: relative">
               <div class="text-block">
                 <ion-card-header>
@@ -57,17 +55,21 @@
             src="https://vietluat.vn/wp-content/uploads/2019/10/cap-ma-vach-ma-so-800x283.png"
             style="width: auto; height: 70%; justify-self: center"
           ></ion-img> -->
-            <ngx-barcode6
+            <!-- <ngx-barcode6
               [bc-format]="'MSI'"
               [bc-value]="'12345678901231'"
               [bc-width]="1.5"
               [bc-display-value]="true"
               [bc-font-size]="20"
             >
-            </ngx-barcode6>
+            </ngx-barcode6> -->
           </ion-card-content>
         </ion-card>
       </ion-slide>
     </ng-container>
+
+    <div *ngIf="childs.length ==0" id="container">
+      <a (click)="add()">Thêm thành viên</a>
+    </div>
   </ion-slides>
 </ion-content>

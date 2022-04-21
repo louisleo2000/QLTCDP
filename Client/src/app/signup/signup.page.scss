@@ -7,9 +7,12 @@
   background-color: #8b8a8a
  }
  .container {
+  display: grid;
   background-color: #ffffff;
   border-radius: 30px;
   margin: 10px;
+  max-width: 500px;
+  height: 90%;
 }
 .back{
   height: 100%;
@@ -26,4 +29,10 @@ ion-item{
 }
 .error-message{
   color: red; margin-left: 20px
+}
+
+.flex-row-center {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
