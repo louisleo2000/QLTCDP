@@ -21,7 +21,7 @@
           <ion-label position="floating"
             >Số bảo hiểm y tế <ion-text color="danger">*</ion-text></ion-label
           >
-          <ion-input required formControlName="health_nsurance_id" type="text" (change)="onChange($event)"></ion-input>
+          <ion-input oninput="this.value = this.value.toUpperCase()" required formControlName="health_nsurance_id" type="text" (change)="onChange($event)"></ion-input>
         </ion-item>
         <ion-row>
           <ion-col size="6">

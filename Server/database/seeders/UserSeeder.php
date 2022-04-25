@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
 
 class UserSeeder extends Seeder
@@ -28,7 +29,7 @@ class UserSeeder extends Seeder
         foreach ($users as $user) {
             DB::table('users')->insert([
                 'name' => $user[0],
-                'password' => $user[1],
+                'password' => Hash::make($user[1]),
                 'email' => $user[2],
                 'role' => $user[3]
             ]);

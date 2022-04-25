@@ -40,6 +40,12 @@ class ChildController extends Controller
             'dob'=> ['required'],
             'health_nsurance_id'=> ['required']
         ]);
+        //verify if the child is already in the database
+        $child = Child::where('name', $request->name)->where('dob', $request->dob)->where('gender', $request->gender)->first();
+        if($child){
+            return response()->json(['message' => 'Child already exists'], 400);
+        }
+        
         if ($request->hasFile('img')) {
             //get name and port of server
             $serverName = "http://" . $_SERVER['SERVER_NAME'] . ":" . $_SERVER['SERVER_PORT'];
@@ -55,10 +61,18 @@ class ChildController extends Controller
             // return response()->json(['error' => 'File not found'],404);
             $img = null;
         }
+        $parent_id = '';
+        if(Auth::user()->role == 1){
+            $parent_id = Auth::user()->medicalStaff->id;
+        }
+        if(Auth::user()->role == 3){
+            $parent_id = Auth::user()->parent->id;
+        }
+
 
         $child = Child::create([
             'name' => $request->name,
-            'parent_id'=> Auth::user()->parent->id,
+            'parent_id'=> $parent_id,
             'gender'=>  $request->gender,
             'weight' => $request->weight,
             'height'=> $request->height,
@@ -105,7 +119,14 @@ class ChildController extends Controller
     public function getMy()
     {
         //
-        return Child::where('parent_id','=',Auth::user()->parent->id)->get();
+        $parent_id = '';
+        if(Auth::user()->role == 1){
+            $parent_id = Auth::user()->medicalStaff->id;
+        }
+        if(Auth::user()->role == 3){
+            $parent_id = Auth::user()->parent->id;
+        }
+        return Child::where('parent_id','=',$parent_id)->get();
     }
 
     /**
