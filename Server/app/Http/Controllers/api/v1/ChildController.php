@@ -58,7 +58,7 @@ class ChildController extends Controller
 
         $child = Child::create([
             'name' => $request->name,
-            'parent_id'=> Auth::user()->id,
+            'parent_id'=> Auth::user()->parent->id,
             'gender'=>  $request->gender,
             'weight' => $request->weight,
             'height'=> $request->height,
@@ -105,7 +105,7 @@ class ChildController extends Controller
     public function getMy()
     {
         //
-        return Child::where('parent_id','=',Auth::user()->id)->get();
+        return Child::where('parent_id','=',Auth::user()->parent->id)->get();
     }
 
     /**

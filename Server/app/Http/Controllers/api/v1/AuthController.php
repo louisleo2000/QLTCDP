@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\api\v1;
 
 use App\Http\Controllers\Controller;
-use App\Models\Parents;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -50,12 +49,10 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
             'role' => $request->role,
         ]);
-        $parent = Parents::create([
-          'user_id' => $user->id,
-        ]);
+    
         event(new Registered($user));
        
-        return response()->json(['status'=>200,'success' => $user,'info'=> $parent],200);
+        return response()->json(['status'=>200,'success' => $user,'info'=> $user->parent],200);
     }
 
     public function me()

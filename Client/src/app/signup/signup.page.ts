@@ -101,6 +101,8 @@ export class SignupPage implements OnInit {
       (res) => {
         if (res.success) {
           this.alertAndLoading.presentAlert('Đăng ký thành công');
+          //reset form
+          this.signupForm.reset();
           this.storageService.store(AuthConstants.AUTH, res.success);
           this.router.navigate(['tabs']);
           this.alertAndLoading.dismissLoadling();

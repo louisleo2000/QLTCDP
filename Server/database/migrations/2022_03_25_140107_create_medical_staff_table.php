@@ -17,7 +17,7 @@ class CreateMedicalStaffTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->string('gender')->default('nam');
-            $table->string('citizen_id');
+            $table->string('citizen_id')->nullable();
             $table->string('img')->nullable();
             $table->string('tel')->nullable();
             $table->timestamps();
