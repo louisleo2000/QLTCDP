@@ -15,13 +15,12 @@ class CreateSchedulesTable extends Migration
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('vaccination_details_id')->unsigned();
-            $table->integer('staff_id')->unsigned();
-            $table->date('date_time');
-            $table->string('status')->default('Đang chờ');
+            $table->integer('vaccine_id')->unsigned();
+            $table->dateTime('date_time');
+            $table->string('status')->default('Khởi tạo');
             $table->timestamps();
-            $table->foreign('vaccination_details_id')
-            ->references('id')->on('vaccination_details')
+            $table->foreign('vaccine_id')
+            ->references('id')->on('vaccines')
             ->onDelete('cascade')
             ->onUpdate('cascade');
         });

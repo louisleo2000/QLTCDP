@@ -16,7 +16,6 @@ class CreateMedicalStaffTable extends Migration
         Schema::create('medical_staff', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->integer('code_id');
             $table->string('gender')->default('nam');
             $table->string('citizen_id');
             $table->string('img')->nullable();

@@ -16,12 +16,21 @@ class CreateVaccinationDetailsTable extends Migration
         Schema::create('vaccination_details', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('child_id')->unsigned();
-            $table->string('vaccine_name');
+            $table->integer('staff_id')->unsigned();
+            $table->integer('vaccine_id')->unsigned();
             $table->string('lot_number');
             $table->string('number_injections');
             $table->timestamps();
             $table->foreign('child_id')
             ->references('id')->on('children')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
+            $table->foreign('staff_id')
+            ->references('id')->on('medical_staff')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
+            $table->foreign('vaccine_id')
+            ->references('id')->on('vaccines')
             ->onDelete('cascade')
             ->onUpdate('cascade');
         });

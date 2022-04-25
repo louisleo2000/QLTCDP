@@ -21,7 +21,11 @@ class Child extends Model
     ];
     public function parent()
     {
-        return $this->belongsTo(User::class,'parent_id');
+        return $this->belongsTo(Parents::class,'parent_id');
+    }
+    public function vaccinations()
+    {
+        return $this->hasMany(VaccinationDetails::class,'child_id');
     }
 
 }
