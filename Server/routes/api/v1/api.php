@@ -24,6 +24,7 @@ Route::prefix('/auth')->group(function () {
     Route::post('/login', [AuthController::class, 'login']);
     Route::post('/register', [AuthController::class, 'store']);
     Route::middleware('auth:api')->get('/me', [AuthController::class, 'me']);
+    Route::middleware('auth:api')->get('/logout', [AuthController::class, 'logout']);
     // Route::post('/logout', [AuthController::class, 'logout']);
 });
 Route::prefix('/child')->group(function () {

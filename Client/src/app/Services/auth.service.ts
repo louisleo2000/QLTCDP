@@ -28,7 +28,6 @@ export class AuthService {
     this.userData.next(user);
     this.currentToken.next(token);
     // console.log(token)
-    this.getchild(token);
   }
   login(postData: any) {
     this.httpService.post('auth/login', postData).subscribe(
@@ -70,10 +69,38 @@ export class AuthService {
   }
 
   async logOut() {
-    await this.storageService.clear();
-    this.userData.next(null);
-    this.childs.next([]);
-    this.router.navigate(['']);
+    let token = await this.storageService.get('token');
+    this.alertAndLoading.presentLoading();
+    let url = 'auth/logout';
+    this.httpService.get(url, token).subscribe(
+      async (res) => {
+        console.log(res);
+        await this.storageService.clear();
+        this.userData.next(null);
+        this.childs.next([]);
+        this.router.navigate(['']);
+        this.alertAndLoading.dismissLoadling();
+      },
+      async (error) => {
+        console.log(error);
+        switch (error.status) {
+          case 401:
+            await this.storageService.clear();
+            this.userData.next(null);
+            this.childs.next([]);
+            this.router.navigate(['']);
+            this.alertAndLoading.dismissLoadling();
+            break;
+          case 500:
+            this.alertAndLoading.presentAlert('Không thể kết nối đến server');
+            break;
+          default:
+            this.alertAndLoading.presentAlert(error.message);
+            break;
+          }
+        this.alertAndLoading.dismissLoadling();
+      }
+    );
   }
 
   addchild(postData: FormData, token: string): Observable<any> {
@@ -138,6 +165,7 @@ export class AuthService {
             // console.log(res.success)
             this.userData.next(res.success);
             await this.storageService.store(AuthConstants.AUTH, res.success);
+            this.getchild(token);
             this.alertAndLoading.dismissLoadling();
             return true;
           } else {
@@ -147,6 +175,23 @@ export class AuthService {
         },
         async (error) => {
           console.log(error);
+          this.alertAndLoading.dismissLoadling();
+          switch (error.status) {
+            case 401:
+              this.alertAndLoading.presentAlert(
+                'Phiên đăng nhập hết hạn.Vui lòng đăng nhập lại'
+              );
+              //if click ok, logout
+              this.logOut();
+              break;
+            case 500:
+              this.alertAndLoading.presentAlert('Không thể kết nối đến server');
+              break;
+            default:
+              this.alertAndLoading.presentAlert(error.message);
+              break;
+          }
+
           let res = await this.storageService.get(AuthConstants.AUTH);
           if (res) {
             this.userData.next(res);

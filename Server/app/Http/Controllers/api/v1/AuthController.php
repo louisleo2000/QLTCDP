@@ -52,14 +52,20 @@ class AuthController extends Controller
     
         event(new Registered($user));
        
-        return response()->json(['status'=>200,'success' => $user,'info'=> $user->parent],200);
+        return response()->json(['status'=>200,'success' => $user,'info'=> $user->info],200);
     }
 
     public function me()
     {
-        return response(['status'=>200,'success'=>Auth::user()]);
+        return response(['status'=>200,'success'=>Auth::user(),'info'=> Auth::user()->info]);
     }
 
+    //logout
+    public function logout()
+    {
+        Auth::user()->token()->revoke();
+        return response(['status'=>200,'success'=>'Logout Successfully']);
+    }
     /**
      * Display a listing of the resource.
      *

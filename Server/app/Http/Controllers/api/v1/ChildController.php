@@ -61,18 +61,12 @@ class ChildController extends Controller
             // return response()->json(['error' => 'File not found'],404);
             $img = null;
         }
-        $parent_id = '';
-        if(Auth::user()->role == 1){
-            $parent_id = Auth::user()->medicalStaff->id;
-        }
-        if(Auth::user()->role == 3){
-            $parent_id = Auth::user()->parent->id;
-        }
+       
 
 
         $child = Child::create([
             'name' => $request->name,
-            'parent_id'=> $parent_id,
+            'parent_id'=> Auth::user()->info->id,
             'gender'=>  $request->gender,
             'weight' => $request->weight,
             'height'=> $request->height,
@@ -119,14 +113,7 @@ class ChildController extends Controller
     public function getMy()
     {
         //
-        $parent_id = '';
-        if(Auth::user()->role == 1){
-            $parent_id = Auth::user()->medicalStaff->id;
-        }
-        if(Auth::user()->role == 3){
-            $parent_id = Auth::user()->parent->id;
-        }
-        return Child::where('parent_id','=',$parent_id)->get();
+        return Child::where('parent_id','=',Auth::user()->info->id)->get();
     }
 
     /**

@@ -88,6 +88,7 @@
                 color="secondary"
                 [value]="pickdate.full"
                 (ionChange)="dataChange(datetime.value)"
+                min="2000-01-01" [max]="now"
               ></ion-datetime>
             </ion-content>
           </ng-template>

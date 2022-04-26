@@ -43,6 +43,23 @@ class User extends Authenticatable
     {
         return $this->hasOne(Parents::class);
     }
+    public function info()
+    {
+        switch($this->role)
+        {
+            case 1:
+                return $this->hasOne(MedicalStaff::class);
+                break;
+            case 3:
+                return $this->hasOne(Parents::class);
+                break;
+            default:
+                return $this->hasOne(MedicalStaff::class);
+                break;
+        }
+       
+    }
+        
     public function medicalStaff()
     {
         return $this->hasOne(MedicalStaff::class);

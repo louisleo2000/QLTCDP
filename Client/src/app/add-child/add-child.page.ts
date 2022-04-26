@@ -27,6 +27,7 @@ export class AddChildPage implements OnInit {
   height: FormControl;
   dob: FormControl;
   health_nsurance_id: FormControl;
+  now =format(new Date(), 'yyyy-MM-dd');
   pickdate = {
     short: format(new Date(), 'dd-MM-yyyy'),
     full: format(new Date(), 'yyyy-MM-dd') + 'T09:00:00.000Z',
@@ -48,9 +49,17 @@ export class AddChildPage implements OnInit {
 
     this.img = new FormControl('', [Validators.required]);
 
-    this.weight = new FormControl('', [Validators.required,Validators.max(200),Validators.min(0)]);
+    this.weight = new FormControl('', [
+      Validators.required,
+      Validators.max(200),
+      Validators.min(0),
+    ]);
 
-    this.height = new FormControl('', [Validators.required,Validators.max(200),Validators.min(10)]);
+    this.height = new FormControl('', [
+      Validators.required,
+      Validators.max(200),
+      Validators.min(10),
+    ]);
 
     this.dob = new FormControl(format(new Date(), 'yyyy-MM-dd'), [
       Validators.required,
@@ -94,8 +103,6 @@ export class AddChildPage implements OnInit {
     });
     //join array to string
     $event.target.value = arr.join(' ');
-    
-    
   }
 
   onImageSelected(event) {
@@ -150,6 +157,10 @@ export class AddChildPage implements OnInit {
           switch (error.status) {
             case 400:
               mess = 'Thông tin thành viên này đã tồn tại trong hệ thống';
+              break;
+            case 401:
+              mess = 'Phiên đăng nhập hết hạn.Vui lòng đăng nhập lại';
+              this.authService.logOut();
               break;
             case 500:
             case 0:
