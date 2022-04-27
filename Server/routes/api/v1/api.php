@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\api\v1\AuthController;
 use App\Http\Controllers\api\v1\ChildController;
+use App\Http\Controllers\Auth\PasswordResetLinkController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,7 +26,7 @@ Route::prefix('/auth')->group(function () {
     Route::post('/register', [AuthController::class, 'store']);
     Route::middleware('auth:api')->get('/me', [AuthController::class, 'me']);
     Route::middleware('auth:api')->get('/logout', [AuthController::class, 'logout']);
-    // Route::post('/logout', [AuthController::class, 'logout']);
+    Route::post('/forgot-password',  [PasswordResetLinkController::class, 'store'])->middleware('guest:api');
 });
 Route::prefix('/child')->group(function () {
     Route::middleware('auth:api')->get('/all', [ChildController::class,'index'])->name('all');

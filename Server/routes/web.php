@@ -1,7 +1,5 @@
 <?php
 
-use App\Mail\RegisterMail;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,15 +15,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
-Route::get('/send-mail', function () {
-   
-    $details = [
-        'title' => 'Mail từ Quản lý tiêm chủng',
-        'body' => 'Đây là mail test từ Quản lý tiêm chủng'
-    ];
-   
-    Mail::to('hoangtugio579@gmail.com')->send(new RegisterMail($details));
-   
-    dd("Email is Sent.");
-});
+})->name('home');
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth:web','role:web'])->name('dashboard');
+
+require __DIR__.'/auth.php';
