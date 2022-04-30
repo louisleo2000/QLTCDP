@@ -3,7 +3,10 @@
 <ion-content [fullscreen]="true" color="secondary">
   <div class="back ion-text-center flex-row-center">
     <div class="container">
-      <ion-img src="../../assets/icon/logo.png" style="width: 60%; justify-self: center;"></ion-img>
+      <ion-img
+        src="../../assets/icon/logo.png"
+        style="width: 60%; justify-self: center"
+      ></ion-img>
       <ion-label style="color: black; font-weight: bold; font-size: 20px"
         >ĐĂNG NHẬP</ion-label
       >
@@ -20,8 +23,19 @@
             <ion-icon slot="start" name="lock-closed"></ion-icon>
             Password
           </ion-label>
-          <ion-input required formControlName="password" type="password">
+          <ion-input required formControlName="password"  [type]="showPass ? 'text' : 'password'">
           </ion-input>
+          <ion-button
+            slot="end"
+            fill="clear"
+            style="margin-top: 15px; color: grey"
+            (click)="toggleFieldTextType()"
+          >
+            <ion-icon
+              [name]="showPass? 'eye-off-outline' : 'eye-outline'"
+              style="font-size: 25px"
+            ></ion-icon>
+          </ion-button>
         </ion-item>
 
         <ion-button

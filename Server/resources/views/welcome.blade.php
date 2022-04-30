@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>Quản lý tiêm chủng</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -408,14 +408,12 @@
                 @auth
                     @if (Auth::user()->role == 1)
                         <a href="{{ route('dashboard') }}"
-                            class="text-sm text-gray-700 underline">{{ __('Dashboard') }}</a>
+                            class="text-sm underline" style="color: white">{{ __('Dashboard') }}</a>
                     @else
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-
                             <button type="submit" class="text-gray-700 underline" style="background-color: transparent;">{{ __('Đăng xuất') }}</button>
                         </form>
-
                     @endif
                 @else
                     <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Đăng nhập</a>
@@ -449,7 +447,7 @@
                                 </path>
                             </svg>
                             <div class="ml-4 text-lg leading-7 font-semibold"><a href="https://laravel.com/docs"
-                                    class="underline text-gray-900 dark:text-white">Documentation</a></div>
+                                    class="underline text-gray-900 dark:text-white">Tài liệu</a></div>
                         </div>
 
                         <div class="ml-12">
@@ -471,7 +469,7 @@
                                 <path d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
                             </svg>
                             <div class="ml-4 text-lg leading-7 font-semibold"><a href="https://laracasts.com"
-                                    class="underline text-gray-900 dark:text-white">Laracasts</a></div>
+                                    class="underline text-gray-900 dark:text-white">Về hệ thồng</a></div>
                         </div>
 
                         <div class="ml-12">
@@ -492,7 +490,7 @@
                                 </path>
                             </svg>
                             <div class="ml-4 text-lg leading-7 font-semibold"><a href="https://laravel-news.com/"
-                                    class="underline text-gray-900 dark:text-white">Laravel News</a></div>
+                                    class="underline text-gray-900 dark:text-white">Tin tức tiêm chủng</a></div>
                         </div>
 
                         <div class="ml-12">
@@ -511,8 +509,7 @@
                                     d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
                                 </path>
                             </svg>
-                            <div class="ml-4 text-lg leading-7 font-semibold text-gray-900 dark:text-white">Vibrant
-                                Ecosystem</div>
+                            <div class="ml-4 text-lg leading-7 font-semibold text-gray-900 dark:text-white">Thông tin khác</div>
                         </div>
 
                         <div class="ml-12">

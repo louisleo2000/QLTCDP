@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Vaccine;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -29,7 +30,7 @@ class VaccineSeeder extends Seeder
         ];
 
         foreach ($vaccines as $vaccine) {
-            DB::table('vaccines')->insert([
+            Vaccine::create([
                 'name' => $vaccine[0],
                 'age_type' => $vaccine[1],
                 'age_distance' => $vaccine[2],

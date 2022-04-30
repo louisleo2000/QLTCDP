@@ -23,6 +23,10 @@ export class SignupPage implements OnInit {
   password_confirmation: FormControl;
   name: FormControl;
   // tel:FormControl
+  fieldTextType = {
+    pass: false,
+    repass: false,
+  };
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
@@ -64,6 +68,12 @@ export class SignupPage implements OnInit {
         validator: this.ConfirmedValidator('password', 'password_confirmation'),
       }
     );
+  }
+
+  toggleFieldTextType(i) {
+    if (i == 1) {
+      this.fieldTextType.pass = !this.fieldTextType.pass;
+    } else this.fieldTextType.repass = !this.fieldTextType.repass;
   }
 
 

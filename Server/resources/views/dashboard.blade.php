@@ -4,7 +4,7 @@
     <div class="col-12">
       <div class="card my-4">
         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-          <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+          <div class="bg-gradient-info shadow-info border-radius-lg pt-4 pb-3">
             <h6 class="text-white text-capitalize ps-3">Projects table</h6>
           </div>
         </div>
@@ -25,7 +25,7 @@
                   <td>
                     <div class="d-flex px-2">
                       <div>
-                        <img src="../assets/img/small-logos/logo-asana.svg" class="avatar avatar-sm rounded-circle me-2" alt="spotify">
+                        <img src="{{asset('admin/img/small-logos/logo-asana.svg')}}" class="avatar avatar-sm rounded-circle me-2" alt="spotify">
                       </div>
                       <div class="my-auto">
                         <h6 class="mb-0 text-sm">Asana</h6>
@@ -58,7 +58,7 @@
                   <td>
                     <div class="d-flex px-2">
                       <div>
-                        <img src="../assets/img/small-logos/github.svg" class="avatar avatar-sm rounded-circle me-2" alt="invision">
+                        <img src="{{asset('admin/img/small-logos/github.svg')}}" class="avatar avatar-sm rounded-circle me-2" alt="invision">
                       </div>
                       <div class="my-auto">
                         <h6 class="mb-0 text-sm">Github</h6>
@@ -91,7 +91,7 @@
                   <td>
                     <div class="d-flex px-2">
                       <div>
-                        <img src="../assets/img/small-logos/logo-atlassian.svg" class="avatar avatar-sm rounded-circle me-2" alt="jira">
+                        <img src="{{asset('admin/img/small-logos/logo-atlassian.svg')}}" class="avatar avatar-sm rounded-circle me-2" alt="jira">
                       </div>
                       <div class="my-auto">
                         <h6 class="mb-0 text-sm">Atlassian</h6>
@@ -124,7 +124,7 @@
                   <td>
                     <div class="d-flex px-2">
                       <div>
-                        <img src="../assets/img/small-logos/bootstrap.svg" class="avatar avatar-sm rounded-circle me-2" alt="webdev">
+                        <img src="{{asset('admin/img/small-logos/bootstrap.svg')}}" class="avatar avatar-sm rounded-circle me-2" alt="webdev">
                       </div>
                       <div class="my-auto">
                         <h6 class="mb-0 text-sm">Bootstrap</h6>
@@ -157,7 +157,7 @@
                   <td>
                     <div class="d-flex px-2">
                       <div>
-                        <img src="../assets/img/small-logos/logo-slack.svg" class="avatar avatar-sm rounded-circle me-2" alt="slack">
+                        <img src="{{asset('admin/img/small-logos/logo-slack.svg')}}" class="avatar avatar-sm rounded-circle me-2" alt="slack">
                       </div>
                       <div class="my-auto">
                         <h6 class="mb-0 text-sm">Slack</h6>
@@ -190,7 +190,7 @@
                   <td>
                     <div class="d-flex px-2">
                       <div>
-                        <img src="../assets/img/small-logos/devto.svg" class="avatar avatar-sm rounded-circle me-2" alt="xd">
+                        <img src="{{asset('admin/img/small-logos/devto.svg')}}" class="avatar avatar-sm rounded-circle me-2" alt="xd">
                       </div>
                       <div class="my-auto">
                         <h6 class="mb-0 text-sm">Devto</h6>

@@ -8,13 +8,17 @@
 </ion-header>
 
 <ion-content color="secondary">
-  <div class="back ion-text-center flex-row-center">
+  <div class="back flex-row-center">
     <div class="container">
       <ion-img
         src="../../assets/icon/logo.png"
         style="width: 50%; justify-self: center"
       ></ion-img>
-      <ion-label style="color: black; font-weight: bold; font-size: 20px">ĐĂNG KÝ</ion-label>
+      <ion-label
+        class="ion-text-center"
+        style="color: black; font-weight: bold; font-size: 20px"
+        >ĐĂNG KÝ</ion-label
+      >
       <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
         <ion-item lines="none" class="g-10 container-input">
           <ion-label position="floating">
@@ -50,8 +54,23 @@
             <ion-icon slot="start" name="lock-closed"></ion-icon>
             Mật khẩu
           </ion-label>
-          <ion-input required formControlName="password" type="password">
+          <ion-input
+            required
+            formControlName="password"
+            [type]="fieldTextType.pass ? 'text' : 'password'"
+          >
           </ion-input>
+          <ion-button
+            slot="end"
+            fill="clear"
+            style="margin-top: 15px; color: grey"
+            (click)="toggleFieldTextType(1)"
+          >
+            <ion-icon
+              [name]="fieldTextType.pass? 'eye-off-outline' : 'eye-outline'"
+              style="font-size: 25px"
+            ></ion-icon>
+          </ion-button>
         </ion-item>
         <ion-label
           *ngIf="!password.valid && (password.dirty || password.touched)"
@@ -66,9 +85,20 @@
           <ion-input
             required
             formControlName="password_confirmation"
-            type="password"
+            [type]="fieldTextType.repass ? 'text' : 'password'"
           >
           </ion-input>
+          <ion-button
+            slot="end"
+            fill="clear"
+            style="margin-top: 15px; color: grey"
+            (click)="toggleFieldTextType(2)"
+          >
+            <ion-icon
+              [name]="fieldTextType.repass? 'eye-off-outline' : 'eye-outline'"
+              style="font-size: 25px"
+            ></ion-icon>
+          </ion-button>
         </ion-item>
         <ion-label
           *ngIf="!password_confirmation.valid && (password_confirmation.dirty || password_confirmation.touched)"

@@ -7,6 +7,8 @@ use App\Models\Child;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
+use Yajra\DataTables\Facades\DataTables;
 
 class ChildController extends Controller
 {
@@ -20,6 +22,35 @@ class ChildController extends Controller
         //
         return Child::all();
     }
+    public function indexWeb()
+    {
+        //
+        return view('pages.childrent');
+    }
+    public function getAllChild()
+    {
+        //
+        return DataTables::of(Child::all())
+            ->addColumn('editbtn', function ($child) {
+                return '<button type="button" class="btn btn-danger">' . $child->id . 'Sửa </button>';
+            })
+            ->editColumn('name', function ($child) {
+                return '<div class="d-flex px-2 py-1">
+                            <div>
+                            <img src="' . $child->img . '" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
+                            </div>
+                            <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">' . $child->name . '</h6>
+                            </div>
+                        </div>';
+            })
+            ->editColumn('dob', function ($child) {
+                $date=date_create($child->dob);
+                return date_format($date,"d-m-Y");
+            })
+            ->rawColumns(['editbtn','name'])
+            ->make(true);
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -30,52 +61,54 @@ class ChildController extends Controller
     public function create(Request $request)
     {
         //
-        $d1 = new DateTime();
-        $d1 =$d1->format('U');
+        $d1 = date('U');;
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'gender' => ['required'],
             'weight' => ['required'],
-            'height'=> ['required'],
-            'dob'=> ['required'],
-            'health_nsurance_id'=> ['required']
+            'height' => ['required'],
+            'dob' => ['required'],
+            'health_nsurance_id' => ['required']
         ]);
         //verify if the child is already in the database
         $child = Child::where('name', $request->name)->where('dob', $request->dob)->where('gender', $request->gender)->first();
-        if($child){
+        if ($child) {
             return response()->json(['message' => 'Child already exists'], 400);
         }
-        
+
         if ($request->hasFile('img')) {
             //get name and port of server
             $serverName = "http://" . $_SERVER['SERVER_NAME'] . ":" . $_SERVER['SERVER_PORT'];
             //get file name
-            $fileName = $request['name'] .$request['dob'] .$d1. "." . $request->file('img')->getClientOriginalExtension();
+            $fileName = Auth::user()->info->id . $request['dob']. "." . $request->file('img')->getClientOriginalExtension();
+            $img = Image::make($request->file('img')->path());
+            $img->resize(350, 400, function ($const) {
+                $const->aspectRatio();
+            })->save(public_path('storage/img').'/'.$fileName);
             //save img in storage public/img
-            $request->file('img')->storeAs('public/img', $fileName);
+            // $request->file('img')->storeAs('public/img', $fileName);
             $path = $serverName . "/storage" . '/img/' . $fileName;
             // return response()->json(['success' => $path],200);
             $img = $path;
-        }
-        else{
+        } else {
             // return response()->json(['error' => 'File not found'],404);
             $img = null;
         }
-       
+
 
 
         $child = Child::create([
             'name' => $request->name,
-            'parent_id'=> Auth::user()->info->id,
-            'gender'=>  $request->gender,
+            'parent_id' => Auth::user()->info->id,
+            'gender' =>  $request->gender,
             'weight' => $request->weight,
-            'height'=> $request->height,
-            'dob'=> $request->dob,
+            'height' => $request->height,
+            'dob' => $request->dob,
             'img' => $img,
             'health_nsurance_id' => $request->health_nsurance_id
         ]);
 
-        return response()->json(['success' =>$child ],200);
+        return response()->json(['success' => $child], 200);
     }
 
 
@@ -113,7 +146,7 @@ class ChildController extends Controller
     public function getMy()
     {
         //
-        return Child::where('parent_id','=',Auth::user()->info->id)->get();
+        return Child::where('parent_id', '=', Auth::user()->info->id)->get();
     }
 
     /**

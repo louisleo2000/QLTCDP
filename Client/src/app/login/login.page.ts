@@ -16,6 +16,7 @@ export class LoginPage implements OnInit {
   loginForm: FormGroup;
   email: FormControl;
   password: FormControl;
+  showPass = false;
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -42,6 +43,9 @@ export class LoginPage implements OnInit {
     });
   }
   ngOnInit() {
+  }
+  toggleFieldTextType() {
+     this.showPass = !this.showPass;
   }
 
 
