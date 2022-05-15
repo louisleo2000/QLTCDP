@@ -97,7 +97,7 @@ export class AuthService {
           default:
             this.alertAndLoading.presentAlert(error.message);
             break;
-          }
+        }
         this.alertAndLoading.dismissLoadling();
       }
     );
@@ -109,12 +109,16 @@ export class AuthService {
 
   async getchild(token) {
     if (this.userData.value != null) {
+      if (this.childs.value.length == 0) {
+        this.alertAndLoading.presentLoading();
+      }
       const status = await Network.getStatus();
       console.log(status.connected);
+      let reschild = await this.storageService.get(AuthConstants.CHILD);
+      if (reschild.length != this.childs.value.length) {
+        this.childs.next(reschild);
+      }
       if (status.connected) {
-        if (this.childs.value.length == 0) {
-          this.alertAndLoading.presentLoading();
-        }
         let childs: any;
         let url = 'child/my-child';
         this.httpService.get(url, token).subscribe(
@@ -128,8 +132,12 @@ export class AuthService {
                   e.dob = format(new Date(e.dob), 'dd/MM/yyyy');
                 }
               });
-              this.childs.next(childs);
-              await this.storageService.store(AuthConstants.CHILD, childs);
+              if (childs.length != this.childs.value.length) {
+                console.log('update');
+                this.childs.next(childs);
+                await this.storageService.store(AuthConstants.CHILD, childs);
+              }
+
               this.alertAndLoading.dismissLoadling();
               return true;
             } else {
@@ -145,8 +153,6 @@ export class AuthService {
           }
         );
       } else {
-        let reschild = await this.storageService.get(AuthConstants.CHILD);
-        this.childs.next(reschild);
         this.alertAndLoading.dismissLoadling();
         return false;
       }
@@ -157,7 +163,14 @@ export class AuthService {
 
   async loadUser(token) {
     const status = await Network.getStatus();
-    if (status.connected) {
+    let res = await this.storageService.get(AuthConstants.AUTH);
+    // console.log(res);
+    if (res) {
+      this.userData.next(res);
+      this.getchild(token);
+      console.log(res);
+    }
+    if (status.connected && token != null) {
       let url = 'auth/me';
       this.httpService.get(url, token).subscribe(
         async (res: any) => {
@@ -190,11 +203,6 @@ export class AuthService {
             default:
               this.alertAndLoading.presentAlert(error.message);
               break;
-          }
-
-          let res = await this.storageService.get(AuthConstants.AUTH);
-          if (res) {
-            this.userData.next(res);
           }
           this.alertAndLoading.dismissLoadling();
           return false;

@@ -25,6 +25,7 @@ Route::get('/dashboard', function () {
 
 Route::get('/childrent', [ChildController::class,'indexWeb'])->middleware(['auth:web','role:web'])->name('child');
 Route::get('/parent', [ParentController::class,'index'])->middleware(['auth:web','role:web'])->name('parent');
+Route::post('/addparent', [ParentController::class,'store'])->middleware(['auth:web','role:web'])->name('parent.store');
 Route::get('/allchild', [ChildController::class,'getAllChild'])->middleware(['auth:web','role:web'])->name('child.all');
 Route::get('/allparent', [ParentController::class,'getAllParents'])->middleware(['auth:web','role:web'])->name('parent.all');
 require __DIR__.'/auth.php';
