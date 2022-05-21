@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\api\v1\ChildController;
 use App\Http\Controllers\api\v1\ParentController;
+use App\Http\Controllers\api\v1\ScheduleController;
+use App\Http\Controllers\VaccineController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,8 +26,19 @@ Route::get('/dashboard', function () {
 })->middleware(['auth:web','role:web'])->name('dashboard');
 
 Route::get('/childrent', [ChildController::class,'indexWeb'])->middleware(['auth:web','role:web'])->name('child');
+Route::get('/allchild', [ChildController::class,'getAllChild'])->middleware(['auth:web','role:web'])->name('child.all');
+
+Route::get('/vaccine', [VaccineController::class,'index'])->middleware(['auth:web','role:web'])->name('vaccine');
+Route::get('/allvaccine', [VaccineController::class,'getAllVaccine'])->middleware(['auth:web','role:web'])->name('vaccine.all');
+Route::post('/addvaccine', [VaccineController::class,'store'])->middleware(['auth:web','role:web'])->name('vaccine.store');
+Route::get('/delvaccine/{id}', [VaccineController::class,'delete'])->middleware(['auth:web','role:web'])->name('vaccine.delete');
+
+Route::get('/schedule', [ScheduleController::class,'index'])->middleware(['auth:web','role:web'])->name('schedule');
+Route::get('/allschedule', [ScheduleController::class,'getAllVaccine'])->middleware(['auth:web','role:web'])->name('schedule.all');
+// Route::post('/addschedule', [ScheduleController::class,'store'])->middleware(['auth:web','role:web'])->name('schedule.store');
+// Route::get('/delschedule/{id}', [ScheduleController::class,'delete'])->middleware(['auth:web','role:web'])->name('schedule.delete');
+
 Route::get('/parent', [ParentController::class,'index'])->middleware(['auth:web','role:web'])->name('parent');
 Route::post('/addparent', [ParentController::class,'store'])->middleware(['auth:web','role:web'])->name('parent.store');
-Route::get('/allchild', [ChildController::class,'getAllChild'])->middleware(['auth:web','role:web'])->name('child.all');
 Route::get('/allparent', [ParentController::class,'getAllParents'])->middleware(['auth:web','role:web'])->name('parent.all');
 require __DIR__.'/auth.php';

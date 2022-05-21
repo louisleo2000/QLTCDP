@@ -24,7 +24,7 @@
     <!-- CSS Files -->
     <link id="pagestyle" href="{{ asset('admin/css/material-dashboard.css?v=3.0.1') }}" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="{{ asset('editor/css/editor.dataTables.min.css') }}" />
+    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('editor/css/editor.dataTables.min.css') }}" /> --}}
 
     {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>120 --}}
 </head>
@@ -50,10 +50,10 @@
     <script src="{{ asset('admin/js/plugins/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ asset('admin/js/plugins/smooth-scrollbar.min.js') }}"></script>
     <script src="{{ asset('admin/js/plugins/chartjs.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('editor/js/editor.jqueryui.js') }}"></script>
+    {{-- <script type="text/javascript" src="{{ asset('editor/js/editor.jqueryui.js') }}"></script>
     <script type="text/javascript" src="{{ asset('editor/js/editor.jqueryui.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('editor/js/dataTables.editor.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('editor/js/dataTables.editor.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('editor/js/dataTables.editor.js') }}"></script> --}}
     <script>
         var win = navigator.platform.indexOf('Win') > -1;
         if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -67,6 +67,32 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="{{ asset('admin/js/material-dashboard.min.js?v=3.0.1') }}"></script>
+    <script>
+        var language = {
+                "decimal": "",
+                "emptyTable": "Không có dữ liệu phù hợp",
+                "info": "Đang xem từ _START_ đến _END_ trên tổng _TOTAL_ ",
+                "infoEmpty": "Đang xem từ 0 đến 0 trên tổng 0 ",
+                "infoFiltered": "(lọc trong _MAX_ total)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "Hiển thị _MENU_ ",
+                "loadingRecords": "Đang tải...",
+                "processing": "Đang xử lý...",
+                "search": "Tìm kiếm:",
+                "zeroRecords": "Không tìm thấy dữ liệu phù hợp",
+                "paginate": {
+                    "first": "Đầu tiên",
+                    "last": "Cuối",
+                    "next": "Tiếp theo",
+                    "previous": "Trước"
+                },
+                "aria": {
+                    "sortAscending": ": sắp xếp tăng dần",
+                    "sortDescending": ": sắp xép giảm dần"
+                }
+            }
+    </script>
     @stack('scripts')
 </body>
 

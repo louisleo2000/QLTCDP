@@ -7,7 +7,7 @@
                     <div class="bg-gradient-info shadow-info border-radius-lg pt-4 pb-3">
                         <div class="row">
                             <div class="col">
-                                <h6 class="text-white text-capitalize ps-3">Quản lý thông tin phụ huynh</h6>
+                                <h4 class="text-white text-capitalize ps-3">Bảng vắc-xin</h4>
                             </div>
                             <div class="col-md-4 d-flex flex-row-reverse me-2">
                                 <button type="button" class="btn btn-primary mr-2" data-bs-toggle="modal"
@@ -23,11 +23,9 @@
                             <thead>
                                 <tr>
                                     <th>id</th>
-                                    <th> Họ và tên</th>
-                                    <th>Giới tính</th>
-                                    <th>CMND/CCCD</th>
-                                    <th>Điện thoại</th>
-                                    <th>Địa chỉ</th>
+                                    <th> Tên vắc-xin</th>
+                                    <th>Độ tuổi</th>
+                                    <th>Mô tả</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -43,52 +41,31 @@
                 <div class="modal-body p-0">
                     <div class="card card-plain">
                         <div class="card-header pb-0 text-left">
-                            <h5 class="">Thêm thông tin phụ huynh</h5>
-                            <p class="mb-0">Nhập thông tin phụ huynh đăng ký</p>
+                            <h5 class="">Thêm thông tin Vắc-xin</h5>
+                            <p class="mb-0">Nhập thông tin vắc-xin cần thêm</p>
                         </div>
                         <div class="card-body">
-                            <form role="form text-left" id="parent_form" action="#">
+                            <form role="form text-left" id="vaccine_form" action="#">
                                 @csrf
                                 <div class="input-group input-group-outline my-3">
-                                    <label class="form-label">Họ và tên</label>
+                                    <label class="form-label">Tên vắc-xin</label>
                                     <input type="text" class="form-control" name="name" onfocus="focused(this)"
                                         onfocusout="defocused(this)" required>
                                 </div>
-                                <div class="input-group input-group-outline my-3">
-                                    <label class="form-label">Email</label>
-                                    <input type="email" class="form-control" name="email" onfocus="focused(this)"
-                                        onfocusout="defocused(this)" required>
+                                <label for="age_distance">Độ tuổi</label>
+                                <div class="input-group input-group-outline">
+
+                                    <input type="text" class="form-control" id="age_distance" placeholder="vd: 2-5"
+                                        name="age_distance" onfocus="focused(this)" onfocusout="defocused(this)" required>
+                                    <select class="form-select p-2" aria-label="Default select example" name="age_type">
+                                        <option selected value="tháng">Tháng</option>
+                                        <option value="tuổi">Tuổi</option>
+                                    </select>
                                 </div>
                                 <div class="input-group input-group-outline my-3">
-                                    <label class="form-label">Password</label>
-                                    <input type="password" class="form-control" name="password" onfocus="focused(this)"
-                                        onfocusout="defocused(this)" required>
-                                </div>
-                                <div>
-                                    <label class="form-label">Giới tính:</label>
-                                    <input class=" ms-3" type="radio" name="gender" id="nam" value="nam" checked>
-                                    <label class="form-check-label" for="nam">
-                                        Nam
-                                    </label>
-                                    <input class=" ms-5" type="radio" name="gender" value="nữ" id="nu">
-                                    <label class="form-check-label" for="nu">
-                                        Nữ
-                                    </label>
-                                </div>
-                                <div class="input-group input-group-outline my-3">
-                                    <label class="form-label">CMND/CCCD</label>
-                                    <input type="text" name="citizen_id" class="form-control" onfocus="focused(this)"
-                                        onfocusout="defocused(this)" required>
-                                </div>
-                                <div class="input-group input-group-outline my-3">
-                                    <label class="form-label">Điện thoại</label>
-                                    <input type="text" name="tel" class="form-control" onfocus="focused(this)"
-                                        onfocusout="defocused(this)" required>
-                                </div>
-                                <div class="input-group input-group-outline my-3">
-                                    <label class="form-label">Địa chỉ</label>
-                                    <input type="text" name="adress" class="form-control" onfocus="focused(this)"
-                                        onfocusout="defocused(this)">
+                                    {{-- <label class="form-label">Mô tả</label> --}}
+                                    <textarea placeholder="Mô tả" class="form-control" name="description" onfocus="focused(this)"
+                                        onfocusout="defocused(this)" required></textarea>
                                 </div>
                                 <div class="text-center">
                                     <button type="submit"
@@ -114,7 +91,7 @@
             $('#parents-table').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{!! route('parent.all') !!}',
+                ajax: '{!! route('vaccine.all') !!}',
                 language:language,
                 columns: [{
                         data: 'id',
@@ -125,47 +102,37 @@
                         name: 'name'
                     },
                     {
-                        data: 'gender',
-                        name: 'gender'
+                        data: 'age',
+                        name: 'age'
                     },
                     {
-                        data: 'citizen_id',
-                        name: 'citizen_id',
-                        defaultContent: 'Chưa cập nhật'
-                    },
-                    {
-                        data: 'tel',
-                        name: 'tel',
-                        defaultContent: 'Chưa cập nhật'
-                    },
-                    {
-                        data: 'adress',
-                        name: 'adress',
+                        data: 'description',
+                        name: 'description',
                         defaultContent: 'Chưa cập nhật'
                     },
                     {
                         orderable: false,
-                        data: 'editbtn',
-                        name: 'editbtn'
+                        data: 'action',
+                        name: 'action'
                     },
                 ]
             });
-            $(document).on('submit', '#parent_form', function() {
+            $(document).on('submit', '#vaccine_form', function() {
                 // do your things
-                addParent();
+                addVaccine();
                 return false;
             });
         });
         //summit form to add parent
 
         //function add new parent to database ajax
-        function addParent() {
-            var form = $('#parent_form');
+        function addVaccine() {
+            var form = $('#vaccine_form');
             // if (form.valid()) {
             $.ajax({
-                url: '{!! route('parent.store') !!}',
+                url: '{!! route('vaccine.store') !!}',
                 type: 'POST',
-                data: $('#parent_form').serialize(),
+                data: $('#vaccine_form').serialize(),
                 success: function(data) {
                     if (data.status == 'success') {
                         $('#modal-form').modal('hide');
@@ -183,6 +150,32 @@
 
             });
             // }
+        }
+
+        function delVaccine(id) {
+            var url = '{!! route('vaccine.delete', ':id') !!}';
+            url = url.replace(':id', id);
+            if (confirm('Bạn có chắc chắn muốn xóa? Thao tác này không thể hoàn tác')) {
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    success: function(data) {
+                        if (data.status == 'success') {
+                            $('#parents-table').DataTable().ajax.reload();
+                            // alert(data.message);
+                        } else {
+                            alert(data.message);
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        // When AJAX call has failed
+                        console.log('AJAX call failed.');
+                        alert(textStatus + ': ' + errorThrown);
+                    },
+
+                });
+            }
+
         }
     </script>
 @endpush

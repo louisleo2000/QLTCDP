@@ -37,6 +37,7 @@
                 processing: true,
                 serverSide: true,
                 ajax: '{!! route('child.all') !!}',
+                language:language,
                 columns: [{
                         data: 'id',
                         name: 'id'
