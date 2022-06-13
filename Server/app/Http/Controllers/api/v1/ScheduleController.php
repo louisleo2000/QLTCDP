@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers\api\v1;
 
+use App\DataTables\ScheduleDataTable;
+use App\DataTables\ScheduleDataTableEditor;
 use App\Http\Controllers\Controller;
 use App\Models\Schedule;
 use App\Http\Requests\StoreScheduleRequest;
 use App\Http\Requests\UpdateScheduleRequest;
+use App\Models\Vaccine;
+use Yajra\DataTables\Facades\DataTables;
 
 class ScheduleController extends Controller
 {
@@ -14,31 +18,38 @@ class ScheduleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(ScheduleDataTable $dataTable)
+    {
+        $data =['vaccines' => Vaccine::all()];
+        return  $dataTable->render('pages.schedule',$data);
+    }
+    // {
+    //     //
+    //     // return view('pages.schedule');
+    // }
+    public function getSchedule()
     {
         //
-        return view('pages.schedule');
+        // return DataTables::of(Schedule::all())
+        //     ->addColumn('action', function ($schedule) {
+        //         return '
+        //         <div>
+        //         <button  type="button" class="btn btn-success">Sửa </button>
+        //         <button  type="button" onClick=delVaccine('.$schedule->id.') class="btn btn-danger">Xóa </button>
+        //         </div>';
+        //     })
+        //     ->addColumn('name', function ($schedule) {
+        //         return $schedule->vaccine->name;
+        //     })
+        //     ->rawColumns(['action'])
+        //     ->make(true);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreScheduleRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreScheduleRequest $request)
+    public function store(ScheduleDataTableEditor $editor)
     {
         //
+        return $editor->process(request());
     }
 
     /**

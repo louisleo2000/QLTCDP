@@ -17,7 +17,7 @@ class CreateSchedulesTable extends Migration
             $table->increments('id');
             $table->integer('vaccine_id')->unsigned();
             $table->dateTime('date_time');
-            $table->string('status')->default('Khởi tạo');
+            $table->string('status')->default('Chưa bắt đầu')->nullable();
             $table->timestamps();
             $table->foreign('vaccine_id')
             ->references('id')->on('vaccines')

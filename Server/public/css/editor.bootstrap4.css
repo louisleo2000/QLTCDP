@@ -706,12 +706,12 @@ div.DTED_Envelope_Wrapper div.DTED_Envelope_Container div.DTED_Envelope_Close:ho
   opacity: 1;
 }
 
-div.card.multi-value,
-div.card.multi-restore {
+div.multi-value,
+div.multi-restore {
   padding: 0.5em;
 }
-div.card.multi-value span,
-div.card.multi-restore span {
+div.multi-value span,
+div.multi-restore span {
   line-height: 1.2em;
 }
 
@@ -731,7 +731,6 @@ div.DTE_Inline div.DTE_Field > div {
   flex: none;
 }
 div.DTE_Inline div.DTE_Field input {
-  font-size: 1em;
   margin: -5px 0 -10px !important;
 }
 
@@ -747,6 +746,7 @@ div.DTE_Field_Type_radio div.DTE_Field_InputControl {
 }
 div.DTE_Field_Type_checkbox div label,
 div.DTE_Field_Type_radio div label {
+  margin-bottom: 0.2em;
   margin-left: 0.75em;
   vertical-align: middle;
 }
@@ -756,16 +756,6 @@ div.DTE div.DTE_Processing_Indicator {
   right: 36px;
 }
 
-div.DTE_Field_Type_datatable div.dataTables_filter {
-  padding-bottom: 0.5em;
-}
-div.DTE_Field_Type_datatable div.dt-buttons {
-  padding-bottom: 0.5em;
-  width: 100%;
-}
-div.DTE_Field_Type_datatable div.dt-buttons:empty {
-  display: none;
-}
 div.DTE_Field_Type_datatable div.dataTables_info {
   font-size: 0.8em;
   line-height: 1.3em;
@@ -773,6 +763,13 @@ div.DTE_Field_Type_datatable div.dataTables_info {
 }
 div.DTE_Field_Type_datatable div.dataTables_info span.select-info {
   display: block;
+}
+div.DTE_Field_Type_datatable div.dt-buttons {
+  padding-bottom: 0.5em;
+  width: 100%;
+}
+div.DTE_Field_Type_datatable div.dt-buttons:empty {
+  display: none;
 }
 div.DTE_Field_Type_datatable div.dataTables_wrapper > table {
   border: 1px solid #ced4da;

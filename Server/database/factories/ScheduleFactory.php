@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Vaccine;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ScheduleFactory extends Factory
@@ -15,6 +16,8 @@ class ScheduleFactory extends Factory
     {
         return [
             //
+            'vaccine_id' =>Vaccine::all()->random()->id,
+             'date_time'=> $this->faker->dateTimeBetween('now', '+1 years'),
         ];
     }
 }
