@@ -1,17 +1,40 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
+    <ion-title> Lịch tiêm chủng </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-list>
+    <ion-list-header> Lịch tiêm sắp tới </ion-list-header>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+    <ion-searchbar
+      placeholder="Tìm kiếm theo tên vắc-xin"
+      [(ngModel)]="searchText"
+    ></ion-searchbar>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <ng-container *ngIf="allschedule.length >0">
+      <ion-item *ngFor="let item of allschedule | filter:searchText">
+        <div class="col mt-2 mb-2">
+          <ion-label>
+            <h2><b>{{item.vaccine.name}}</b></h2>
+            <p>
+              <ion-text color="dark"> <b>Ngày:</b> {{item.date_time}} </ion-text>
+            </p>
+            <p>
+              <ion-text color="dark"> <b>Bắt đầu lúc:</b> {{item.time}} </ion-text>
+            </p>
+            <p>
+              <ion-text color="dark">
+                <b>Độ tuổi tiêm:</b> {{item.vaccine.age_distance}}
+                {{item.vaccine.age_type}}
+              </ion-text >
+            </p>
+          </ion-label>
+        </div>
+      </ion-item>
+    </ng-container>
+  </ion-list>
 </ion-content>

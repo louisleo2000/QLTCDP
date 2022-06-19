@@ -52,10 +52,10 @@
             style="display: grid"
             [routerLink]="['/child-details/'+item.id]"
           >
-            <!-- <ion-img
+            <ion-img
             src="https://vietluat.vn/wp-content/uploads/2019/10/cap-ma-vach-ma-so-800x283.png"
             style="width: auto; height: 70%; justify-self: center"
-          ></ion-img> -->
+          ></ion-img>
             <!-- <ngx-barcode6
               [bc-format]="'MSI'"
               [bc-value]="'12345678901231'"
@@ -70,7 +70,7 @@
     </ng-container>
 
     <div *ngIf="childs.length ==0" id="container">
-      <a (click)="add()">Thêm thành viên</a>
+      <a class="text-info" (click)="add()">Thêm thành viên</a>
     </div>
   </ion-slides>
 </ion-content>

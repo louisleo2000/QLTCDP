@@ -21,7 +21,20 @@ class VaccineDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', 'vaccine.action');
+            ->setRowId('id')
+            ->editColumn('age_distance', function ($vaccine) {
+                return $vaccine->age_distance . ' ' . $vaccine->age_type;
+            })
+            ->editColumn('created_at', function ($customer) {
+                if ($customer->created_at) {
+                    return $customer->created_at->format('d/m/Y H:i:s');
+                }
+            })
+            ->editColumn('updated_at', function ($customer) {
+                if ($customer->updated_at) {
+                    return $customer->updated_at->format('d/m/Y H:i:s');
+                }
+            });
     }
 
     /**
@@ -43,18 +56,24 @@ class VaccineDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('vaccine-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    ->dom('Bfrtip')
-                    ->orderBy(1)
-                    ->buttons(
-                        Button::make('create'),
-                        Button::make('export'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
-                    );
+            ->setTableId('vaccine-table')
+            ->columns($this->getColumns())
+            ->minifiedAjax()
+            ->dom('Bfrtip')
+            ->buttons(
+                Button::make('create')->editor('editor'),
+                Button::make('edit')->editor('editor'),
+                Button::make('remove')->editor('editor'),
+                Button::make('print')->text('In'),
+                Button::make('colvis')->text('Cột'),
+                [
+                    'extend' => 'csv',
+                    'split' => ['pdf', 'excel'],
+                    // 'className' => 'bg-warning',
+                ]
+            )
+            ->select('id', 'name', 'img', 'created_at', 'updated_at')
+            ->language(config('app.datatableLanguage'));
     }
 
     /**
@@ -65,15 +84,13 @@ class VaccineDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
-            Column::make('id'),
-            Column::make('add your columns'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+            Column::make('id')->className('text-center'),
+            Column::make('name')->title('Tên Vaccine'),
+            Column::make('age_distance')->title('Độ tuổi')->className('text-center'),
+            Column::make('description')->title('Mô tả')->className('text-wrap'),
+            Column::make('created_at')->title('Ngày tạo')->className('text-center'),
+            Column::make('updated_at')->title('Ngày cập nhật')->className('text-center'),
+            Column::make('age_type')->searchable(true)->visible(false)->title(''),
         ];
     }
 

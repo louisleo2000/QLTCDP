@@ -2,20 +2,20 @@ import { Injectable } from '@angular/core';
 import { AlertController, LoadingController } from '@ionic/angular';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AlertAndLoadingService {
-  isLoading
+  isLoading;
   constructor(
     public alertController: AlertController,
     public loadingController: LoadingController
-  ) { }
+  ) {}
 
   async presentAlert(message: string) {
     const alert = await this.alertController.create({
       header: 'Thông báo',
       message: message,
-      buttons: ['OK']
+      buttons: ['OK'],
     });
 
     await alert.present();
@@ -23,15 +23,15 @@ export class AlertAndLoadingService {
   async presentLoading() {
     this.isLoading = await this.loadingController.create({
       message: 'Đợi một chút...',
-      duration: 10000
+      duration: 10000,
     });
     this.isLoading.present();
   }
-  dismissLoadling()
-  {
-    if(this.isLoading)
-    {
-      this.isLoading.dismiss()
-    }
+  dismissLoadling() {
+    setTimeout(() => {
+      if (this.isLoading) {
+        this.isLoading.dismiss();
+      }
+    }, 1000);
   }
 }

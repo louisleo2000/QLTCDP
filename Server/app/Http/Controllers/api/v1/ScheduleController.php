@@ -20,8 +20,16 @@ class ScheduleController extends Controller
      */
     public function index(ScheduleDataTable $dataTable)
     {
+        
         $data =['vaccines' => Vaccine::all()];
         return  $dataTable->render('pages.schedule',$data);
+    }
+    public function indexAPI(ScheduleDataTable $dataTable)
+    {
+        //get schedules with vaccines
+        $data =['schedules' => Schedule::with('vaccine')->get()];
+        // dd($data['vaccines']);
+        return response()->json(['data' => $data]);
     }
     // {
     //     //

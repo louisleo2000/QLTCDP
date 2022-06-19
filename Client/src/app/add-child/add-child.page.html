@@ -19,9 +19,9 @@
         </ion-item>
         <ion-item color = "light">
           <ion-label position="floating"
-            >Số bảo hiểm y tế <ion-text color="danger">*</ion-text></ion-label
+            >Số bảo hiểm y tế <ion-text color="danger" >*</ion-text></ion-label
           >
-          <ion-input oninput="this.value = this.value.toUpperCase()" required formControlName="health_nsurance_id" type="text" (change)="onChange($event)"></ion-input>
+          <ion-input oninput="this.value = this.value.toUpperCase()" required formControlName="health_nsurance_id" type="text" (change)="onChange($event)" ></ion-input>
         </ion-item>
         <ion-row>
           <ion-col size="6">
@@ -48,7 +48,7 @@
         </ion-row>
 
         <ion-radio-group  formControlName="gender">
-          <h5 style="margin-left: 12px;">Giới tính</h5>
+          <ion-label><h2 style="margin-left: 12px;">Giới tính</h2></ion-label>
           <ion-row>
             <ion-col size="4">
               <ion-item color = "light" lines="none">
@@ -73,7 +73,7 @@
         </ion-item>
 
         <ion-item color = "light" lines="none" id="open-modal">
-          <h5>Ngày sinh</h5>
+          <ion-label><h2>Ngày sinh</h2></ion-label>
           <ion-text slot="end">
             {{pickdate.short}}
             <span style="color: rgb(155, 152, 152)">(dd-MM-yyyy)</span>

@@ -1,23 +1,5 @@
 @extends('layouts.app')
 @section('content')
-    <style>
-        .form-control {
-            width: 100%;
-            padding-left: 10px;
-            border: 2px solid #ced4da;
-            border-radius: 5px;
-        }
-
-        .form-control:focus {
-            width: 100%;
-            border: 2px solid #ced4da;
-        }
-
-        .col-lg-8 {
-            width: 100%;
-        }
-
-    </style>
     <div class="row mt-4">
         <div class="col-12">
             <div class="card my-4">
@@ -57,7 +39,7 @@
                 ajax: 'schedule',
                 table: "#schedule-table",
                 display: 'bootstrap',
-                fields: [{
+                    fields: [{
                         label: "Tên Vắc-xin",
                         name: "vaccine_id",
                         type: "select",
@@ -75,7 +57,31 @@
                     },
                     {
                         label: "Trạng thái",
-                        name: "status"
+                        name: "status",
+                        type: "select",
+                        // placeholder: "Tên Vắc-xin",
+                        options: [
+                            {
+                                label: "Đang chuẩn bị",
+                                value: "Đang chuẩn bị"
+                            },
+                            {
+                                label: "Chưa bắt đầu",
+                                value: "Chưa bắt đầu"
+                            },
+                            {
+                                label: "Đang diễn ra",
+                                value: "Đang diễn ra"
+                            },
+                            {
+                                label: "Đã kết thúc",
+                                value: "Đã kết thúc"
+                            },
+                            {
+                                label: "Đã hủy",
+                                value: "Đã hủy"
+                            },
+                        ]
                     },
                     {
                         label: "Ngày bắt đầu",

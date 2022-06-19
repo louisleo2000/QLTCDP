@@ -3,6 +3,8 @@
 use App\Http\Controllers\api\v1\ChildController;
 use App\Http\Controllers\api\v1\ParentController;
 use App\Http\Controllers\api\v1\ScheduleController;
+use App\Http\Controllers\ChildrentController;
+use App\Http\Controllers\ParentAdminController;
 use App\Http\Controllers\VaccineController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,13 +32,13 @@ Route::get('/dashboard', function () {
 })->middleware(['auth:web','role:web'])->name('dashboard');
 
 
-Route::get('/childrent', [ChildController::class,'indexWeb'])->middleware(['auth:web','role:web'])->name('child');
-Route::get('/allchild', [ChildController::class,'getAllChild'])->middleware(['auth:web','role:web'])->name('child.all');
+// Route::get('/childrent', [ChildController::class,'indexWeb'])->middleware(['auth:web','role:web'])->name('child');
+// Route::get('/allchild', [ChildController::class,'getAllChild'])->middleware(['auth:web','role:web'])->name('child.all');
 
-Route::get('/vaccine', [VaccineController::class,'index'])->middleware(['auth:web','role:web'])->name('vaccine');
-Route::get('/allvaccine', [VaccineController::class,'getAllVaccine'])->middleware(['auth:web','role:web'])->name('vaccine.all');
-Route::post('/addvaccine', [VaccineController::class,'store'])->middleware(['auth:web','role:web'])->name('vaccine.store');
-Route::get('/delvaccine/{id}', [VaccineController::class,'delete'])->middleware(['auth:web','role:web'])->name('vaccine.delete');
+// Route::get('/vaccine', [VaccineController::class,'index'])->middleware(['auth:web','role:web'])->name('vaccine');
+// Route::get('/allvaccine', [VaccineController::class,'getAllVaccine'])->middleware(['auth:web','role:web'])->name('vaccine.all');
+// Route::post('/addvaccine', [VaccineController::class,'store'])->middleware(['auth:web','role:web'])->name('vaccine.store');
+// Route::get('/delvaccine/{id}', [VaccineController::class,'delete'])->middleware(['auth:web','role:web'])->name('vaccine.delete');
 
 // Route::get('/schedule', [ScheduleController::class,'index'])->middleware(['auth:web','role:web'])->name('schedule');
 // Route::get('/allschedule', [ScheduleController::class,'getSchedule'])->middleware(['auth:web','role:web'])->name('schedule.all');
@@ -48,4 +50,10 @@ Route::post('/addparent', [ParentController::class,'store'])->middleware(['auth:
 Route::get('/allparent', [ParentController::class,'getAllParents'])->middleware(['auth:web','role:web'])->name('parent.all');
 
 Route::resource('schedule', ScheduleController::class)->middleware(['auth:web','role:web']);
+Route::resource('childrent', ChildrentController::class)->middleware(['auth:web','role:web']);
+Route::resource('parentadmin', ParentAdminController::class)->middleware(['auth:web','role:web']);
+Route::resource('vaccine', VaccineController::class)->middleware(['auth:web','role:web']);
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});
 require __DIR__.'/auth.php';

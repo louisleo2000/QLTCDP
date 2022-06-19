@@ -1,8 +1,10 @@
 <?php
 
+use App\DataTables\ScheduleDataTable;
 use App\Http\Controllers\api\v1\AuthController;
 use App\Http\Controllers\api\v1\ChildController;
 use App\Http\Controllers\api\v1\ParentController;
+use App\Http\Controllers\api\v1\ScheduleController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -34,5 +36,10 @@ Route::prefix('/child')->group(function () {
     Route::middleware('auth:api')->get('/del/{id}', [ChildController::class,'del'])->name('del');
     Route::middleware('auth:api')->post('/add', [ChildController::class,'create']);
     Route::middleware('auth:api')->get('/my-child', [ChildController::class,'getMy']);
+    // Route::post('/parent', [ParentController::class,'store']);
+});
+
+Route::prefix('/schedule')->group(function () {
+    Route::middleware('auth:api')->get('/all', [ScheduleController::class,'indexAPI'])->name('all');
     // Route::post('/parent', [ParentController::class,'store']);
 });

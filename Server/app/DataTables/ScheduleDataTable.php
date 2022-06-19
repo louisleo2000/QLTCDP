@@ -21,15 +21,16 @@ class ScheduleDataTable extends DataTable
     public function dataTable($query)
     {
         return datatables()
-            ->eloquent($query)
-            ->addColumn('name', function ($schedule) {
-                return $schedule->vaccine->name;
-            })
+            ->eloquent($query->with('vaccine'))
+            // ->addColumn('name', function ($schedule) {
+            //     return $schedule->vaccine->name;
+            // })
+          
             ->editColumn('created_at', function ($schedule) {
-                return $schedule->created_at->format('d/m/Y');
+                return $schedule->created_at->format('d-m-Y H:i:s');
             })
             ->editColumn('updated_at', function ($schedule) {
-                return $schedule->updated_at->format('d/m/Y');
+                return $schedule->updated_at->format('d-m-Y H:i:s');
             })
             ->setRowId('id');
     }
@@ -61,37 +62,17 @@ class ScheduleDataTable extends DataTable
                 Button::make('create')->editor('editor'),
                 Button::make('edit')->editor('editor'),
                 Button::make('remove')->editor('editor'),
-                Button::make('export'),
-                Button::make('print'),
-                // Button::make('reset'),
-                // Button::make('reload')
-            )
-            ->select('id', 'name', 'status', 'date_time', 'created_at', 'updated_at')
-            ->orderBy(3,'asc')
-            ->language([
-                "decimal" => "",
-                "emptyTable" => "Không có dữ liệu phù hợp",
-                "info" => "Đang xem từ _START_ đến _END_ trên tổng _TOTAL_ ",
-                "infoEmpty" => "Đang xem từ 0 đến 0 trên tổng 0 ",
-                "infoFiltered" => "(lọc trong _MAX_ total)",
-                "infoPostFix" => "",
-                "thousands" => ",",
-                "lengthMenu" => "Hiển thị _MENU_ ",
-                "loadingRecords" => "Đang tải...",
-                "processing" => "Đang xử lý...",
-                "search" => "Tìm kiếm:",
-                "zeroRecords" => "Không tìm thấy dữ liệu phù hợp",
-                "paginate" => [
-                    "first" => "Đầu tiên",
-                    "last" => "Cuối",
-                    "next" => "▶",
-                    "previous" => "◀"
-                ],
-                "aria" => [
-                    "sortAscending" => "=> sắp xếp tăng dần",
-                    "sortDescending" => "=> sắp xép giảm dần"
+                Button::make('print')->text('In'),
+                Button::make('colvis')->text('Cột'),
+                [
+                    'extend' => 'csv',
+                    'split' => ['pdf', 'excel'],
+                    // 'className' => 'bg-warning',
                 ]
-            ]);
+            )
+            ->orderBy(2,'asc')
+            ->select('id', 'name', 'status', 'date_time', 'created_at', 'updated_at')
+            ->language(config('app.datatableLanguage'));
     }
 
     /**
@@ -107,8 +88,8 @@ class ScheduleDataTable extends DataTable
             //       ->printable(false)
             //       ->width(60)
             //       ->addClass('text-center'),
-            Column::make('id')->addClass('text-center')->width(60),
-            Column::make('name')->title('Tên Vắc-xin')->addClass('text-center'),
+            // Column::make('id')->addClass('text-center')->width(60),  
+            Column::make('vaccine.name')->title('Tên Vắc-xin')->addClass('text-center'),
             Column::make('status')->title('Trạng thái')->addClass('text-center'),
             Column::make('date_time')->title('Thời gian')->addClass('text-center'),
             Column::make('created_at')->title('Ngày tạo')->addClass('text-center'),

@@ -2,14 +2,14 @@
 
 namespace App\DataTables;
 
-use App\DataTables\Vacine;
+use  App\Models\Vaccine;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Validation\Rule;
 use Yajra\DataTables\DataTablesEditor;
 
 class VacineDataTableEditor extends DataTablesEditor
 {
-    protected $model = Vacine::class;
+    protected $model = Vaccine::class;
 
     /**
      * Get create action validation rules.
@@ -19,7 +19,7 @@ class VacineDataTableEditor extends DataTablesEditor
     public function createRules()
     {
         return [
-            'email' => 'required|email|unique:' . $this->resolveModel()->getTable(),
+            // 'email' => 'required|email|unique:' . $this->resolveModel()->getTable(),
             'name'  => 'required',
         ];
     }
@@ -33,7 +33,7 @@ class VacineDataTableEditor extends DataTablesEditor
     public function editRules(Model $model)
     {
         return [
-            'email' => 'sometimes|required|email|' . Rule::unique($model->getTable())->ignore($model->getKey()),
+            // 'email' => 'sometimes|required|email|' . Rule::unique($model->getTable())->ignore($model->getKey()),
             'name'  => 'sometimes|required',
         ];
     }

@@ -80,7 +80,7 @@ $.extend( true, $.fn.dataTable.Editor.classes, {
 		"msg-error":     "form-text text-danger small",
 		"multiValue":    "card multi-value",
 		"multiInfo":     "small",
-		"multiRestore":  "multi-restore"
+		"multiRestore":  "card multi-restore"
 	}
 } );
 

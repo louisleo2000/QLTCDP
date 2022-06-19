@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('content')
+@section('content')    
     <div class="row mt-4">
         <div class="col-12">
             <div class="card my-4">
@@ -10,7 +10,7 @@
                 </div>
                 <div class="card-body px-3 pb-2">
                     <div class="table-responsive p-0">
-                        <table class="table align-items-center justify-content-center mb-0 text-center text-capitalize"
+                        {{-- <table class="table align-items-center justify-content-center mb-0 text-center text-capitalize"
                             id="childs-table">
                             <thead>
                                 <tr>
@@ -23,14 +23,15 @@
                                     <th></th>
                                 </tr>
                             </thead>
-                        </table>
+                        </table> --}}
+                        {{ $dataTable->table(['id' => 'childrent-table']) }}
                     </div>
                 </div>
             </div>
         </div>
     </div>
 @stop
-@push('scripts')
+{{-- @push('scripts')
     <script>
         $(function() {
             $('#childs-table').DataTable({
@@ -69,6 +70,57 @@
                     },
                 ]
             });
+        });
+    </script>
+@endpush --}}
+@push('scripts')
+    <script>
+        $(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            var editor = new $.fn.dataTable.Editor({
+                ajax: 'childrent',
+                table: "#childrent-table",
+                display: 'bootstrap',
+                fields: [
+                    {
+                        label: "Họ và tên:",
+                        name: "name",
+                        
+                    },
+                    {
+                        label: "Ngày sinh:",
+                        name: "dob",
+
+                    }
+                ],
+                i18n: {
+                    create: {
+                        title: "<h4>Thêm trẻ em</h4>",
+                        button: 'Thêm',
+                        submit: 'Thêm'
+                    },
+                    edit: {
+                        title: "<h4>Sửa thong tin</h4>",
+                        button: 'Sửa',
+                        submit: 'Sửa'
+                    },
+                    remove: {
+                        title: "<h4>Xóa thông tin</h4>",
+                        button: "Xóa",
+                        submit: 'Xóa',
+                        confirm: 'Bạn có chắc chắn muốn xóa?'
+                    },
+                }
+            });
+            // $('#schedule-table').on('click', 'tbody td:not(:first-child)', function(e) {
+            //     editor.inline(this);
+            // });
+            {{ $dataTable->generateScripts() }}
+
         });
     </script>
 @endpush

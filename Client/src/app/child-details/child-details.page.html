@@ -4,6 +4,13 @@
       <ion-back-button defaultHref="tabs"></ion-back-button>
     </ion-buttons>
     <ion-title>Thông tin</ion-title>
+    <ion-icon
+      slot="end"
+      name="create-outline"
+      style="font-size: 25px"
+
+    ></ion-icon>
+    
   </ion-toolbar>
 </ion-header>
 
@@ -30,30 +37,30 @@
         <ion-row class="ion-justify-content-center">
           <ion-col size="4" class="ion-text-center">
             <ion-icon name="today" class="icon"></ion-icon>
-            <h5>Ngày sinh</h5>
-            <h4>{{currentChild.dob}}</h4>
+            <ion-label><h5>Ngày sinh</h5></ion-label>
+            <ion-label><h4>{{currentChild.dob}}</h4></ion-label>
           </ion-col>
           <ion-col size="4" class="ion-text-center">
             <ion-icon name="scale" class="icon"></ion-icon>
-            <h5>Cân nặng</h5>
-            <h4>{{currentChild.weight}} kg</h4>
+            <ion-label><h5>Cân nặng</h5></ion-label>
+            <ion-label><h4>{{currentChild.weight}} kg</h4></ion-label>
           </ion-col>
           <ion-col size="4" class="ion-text-center">
             <ion-icon name="body" class="icon"></ion-icon>
-            <h5>Chiều cao</h5>
-            <h4>{{currentChild.height}} cm</h4>
+            <ion-label><h5>Chiều cao</h5></ion-label>
+            <ion-label><h4>{{currentChild.height}} cm</h4></ion-label>
           </ion-col>
         </ion-row>
       </ion-card>
 
       <ion-card class="bg-white">
         <ion-list class="bg-white">
-          <ion-list-header>
-            <ion-col size="9" >
-              <h3>Tiêm chủng</h3>
+          <ion-list-header class="p-0">
+            <ion-col size="8" >
+              <ion-label class="text-black"><h1>Tiêm chủng</h1></ion-label>
             </ion-col>
             <ion-col size="4">
-              <a>
+              <a  class="text-info" style="font-size: 14px;">
                 Lịch sử tiêm
               </a>
             </ion-col>

@@ -27285,5 +27285,26 @@ pre[class*="language-"] {
     overflow: auto !important;
   }
 }
+.table-responsive  input.form-control,.DTE_Field_InputControl {
+  width: 100%;
+  padding-left: 10px;
+  padding-right: 10px;
+  border: 2px solid #ced4da;
+  border-radius: 5px;
+}
+
+.table-responsive  input.form-control:focus {
+  width: 100%;
+  border: 2px solid #ced4da;
+}
+
+.table-responsive  input.col-lg-8,.col-lg-8 {
+  width: 100%;
+}
+.columnVisibility,.dropdown-item.active, .columnVisibility,.dropdown-item:active {
+  color: #f8f9fa;
+  text-decoration: none;
+  background-color: #0d6efd;
+}
 
 /*# sourceMappingURL=dashboard-free.css.map */
