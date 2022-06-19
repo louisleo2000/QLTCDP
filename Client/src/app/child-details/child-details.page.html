@@ -8,7 +8,7 @@
       slot="end"
       name="create-outline"
       style="font-size: 25px"
-
+      (click)="isModalOpen = true"
     ></ion-icon>
     
   </ion-toolbar>
@@ -59,7 +59,7 @@
             <ion-col size="8" >
               <ion-label class="text-black"><h1>Tiêm chủng</h1></ion-label>
             </ion-col>
-            <ion-col size="4">
+            <ion-col size="4" class="text-end">
               <a  class="text-info" style="font-size: 14px;">
                 Lịch sử tiêm
               </a>
@@ -84,4 +84,17 @@
       </ion-card>
     </div>
   </ion-grid>
+  <ion-modal [isOpen]="isModalOpen">
+    <ng-template>
+      <ion-header translucent>
+        <ion-toolbar>
+          <ion-title>Sửa thông tin</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="isModalOpen = false">Đóng</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      
+    </ng-template>
+  </ion-modal>
 </ion-content>

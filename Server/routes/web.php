@@ -3,6 +3,7 @@
 use App\Http\Controllers\api\v1\ChildController;
 use App\Http\Controllers\api\v1\ParentController;
 use App\Http\Controllers\api\v1\ScheduleController;
+use App\Http\Controllers\api\v1\VaccinationDetailsController;
 use App\Http\Controllers\ChildrentController;
 use App\Http\Controllers\ParentAdminController;
 use App\Http\Controllers\VaccineController;
@@ -50,6 +51,7 @@ Route::post('/addparent', [ParentController::class,'store'])->middleware(['auth:
 Route::get('/allparent', [ParentController::class,'getAllParents'])->middleware(['auth:web','role:web'])->name('parent.all');
 
 Route::resource('schedule', ScheduleController::class)->middleware(['auth:web','role:web']);
+Route::resource('vaccinationdetails', VaccinationDetailsController::class)->middleware(['auth:web','role:web']);
 Route::resource('childrent', ChildrentController::class)->middleware(['auth:web','role:web']);
 Route::resource('parentadmin', ParentAdminController::class)->middleware(['auth:web','role:web']);
 Route::resource('vaccine', VaccineController::class)->middleware(['auth:web','role:web']);

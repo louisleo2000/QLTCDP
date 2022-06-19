@@ -4,9 +4,11 @@ namespace App\Http\Controllers\api\v1;
 
 use App\Http\Controllers\Controller;
 use App\Models\Child;
+use App\Models\VaccinationDetails;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Intervention\Image\Facades\Image;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -73,7 +75,11 @@ class ChildController extends Controller
         //verify if the child is already in the database
         $child = Child::where('name', $request->name)->where('dob', $request->dob)->where('gender', $request->gender)->first();
         if ($child) {
-            return response()->json(['message' => 'Child already exists'], 400);
+            return response()->json(['message' => 'Thông tin trẻ em này đã có trong kho dữ liệu'], 400);
+        }
+        $child = Child::where('health_nsurance_id' , $request->health_nsurance_id)->first();
+        if ($child) {
+            return response()->json(['message' => 'Số bảo hiểm y tế đã được sử dụng'], 400);
         }
 
         if ($request->hasFile('img')) {
@@ -146,7 +152,9 @@ class ChildController extends Controller
     public function getMy()
     {
         //
-        return Child::where('parent_id', '=', Auth::user()->info->id)->get();
+        $childs = Child:: where('parent_id', '=', Auth::user()->info->id)->load('vaccinationsDetails')->get();
+        
+        return response()->json(['info' => $childs], 200);
     }
 
     /**

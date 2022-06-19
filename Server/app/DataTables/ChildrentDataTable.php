@@ -21,7 +21,15 @@ class ChildrentDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->setRowId('id');
+            ->setRowId('id')
+            ->editColumn('img', function ($parent) {
+                if ($parent->img) {
+                    return '<img  src="' . $parent->img . '" width="100px" height="100px" style="object-fit: contain;">';
+                } else {
+                    return '<img src="https://via.placeholder.com/100x100" width="100px" height="100px">';
+                }
+            })
+            ->rawColumns(['img']);
     }
 
     /**
@@ -60,7 +68,7 @@ class ChildrentDataTable extends DataTable
                             // 'className' => 'bg-warning',
                         ]
                     )
-                    ->select('id', 'name', 'img', 'created_at', 'updated_at')
+                    ->select('single')
                     ->language(config('app.datatableLanguage'));
     }
 
@@ -72,9 +80,14 @@ class ChildrentDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('id'),
+            Column::make('id')->className('text-center'),
+            Column::make('img')->title('Ảnh'),
             Column::make('name')->title('Họ tên'),
             Column::make('dob')->title('Ngày sinh'),
+            Column::make('gender')->title('Giới tính'),
+            Column::make('health_nsurance_id')->title('Số bảo hiểm y tế'),
+            Column::make('height')->title('Chiều cao')->className('text-center'),
+            Column::make('weight')->title('Cân nặng')->className('text-center'),
             Column::make('created_at')->title('Ngày tạo'),
             Column::make('updated_at')->title('Ngày cập nhật'),
         ];

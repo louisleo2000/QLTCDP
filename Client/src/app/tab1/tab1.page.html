@@ -7,7 +7,6 @@
       style="font-size: 45px"
       (click)="add()"
     ></ion-icon>
-    
   </ion-toolbar>
 </ion-header>
 
@@ -26,24 +25,27 @@
               <div class="text-block">
                 <ion-card-header>
                   <h1 class="text-start">{{item.name}}</h1>
-                  <ion-card-subtitle
-                    *ngIf="item.age.year >0"
-                    class="text-start"
-                  >
-                    {{item.age.year}} tuổi
-                  </ion-card-subtitle>
-                  <ion-card-subtitle
-                    *ngIf="item.age.year > 0 && item.age.month > 0"
-                    class="text-start"
-                  >
-                    {{item.age.month}} tháng
-                  </ion-card-subtitle>
-                  <ion-card-subtitle
-                    *ngIf="item.age.month == 0 && item.age.year == 0"
-                    class="text-start"
-                  >
-                    {{item.age.day}} ngày
-                  </ion-card-subtitle>
+                  <div class="row">
+                    <ion-label
+                      *ngIf="item.age.year >0"
+                      class="text-start"
+                    >
+                      {{item.age.year}} tuổi
+                   
+                    <span
+                      *ngIf="item.age.year > 0 && item.age.month > 0"
+                      class="text-start"
+                    >
+                      {{item.age.month}} tháng
+                    </span>
+                    <span
+                      *ngIf="item.age.month == 0 && item.age.year == 0"
+                      class="text-start"
+                    >
+                      {{item.age.day}} ngày
+                    </span>
+                  </ion-label>
+                  </div>
                 </ion-card-header>
               </div>
             </div>
@@ -53,9 +55,9 @@
             [routerLink]="['/child-details/'+item.id]"
           >
             <ion-img
-            src="https://vietluat.vn/wp-content/uploads/2019/10/cap-ma-vach-ma-so-800x283.png"
-            style="width: auto; height: 70%; justify-self: center"
-          ></ion-img>
+              src="https://vietluat.vn/wp-content/uploads/2019/10/cap-ma-vach-ma-so-800x283.png"
+              style="width: auto; height: 70%; justify-self: center"
+            ></ion-img>
             <!-- <ngx-barcode6
               [bc-format]="'MSI'"
               [bc-value]="'12345678901231'"

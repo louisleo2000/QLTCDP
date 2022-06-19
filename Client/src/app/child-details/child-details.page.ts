@@ -10,6 +10,7 @@ import { AuthService } from './../Services/auth.service';
 export class ChildDetailsPage implements OnInit {
   id: number
   currentChild
+  isModalOpen: boolean = false;
   constructor(private route: ActivatedRoute, private authService: AuthService) {
     this.id = this.route.snapshot.params.id
     this.currentChild = authService.childs.value.find(e => {
@@ -20,5 +21,6 @@ export class ChildDetailsPage implements OnInit {
   ngOnInit() {
 
   }
+
 
 }

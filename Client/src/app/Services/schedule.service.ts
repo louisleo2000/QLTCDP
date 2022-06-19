@@ -23,16 +23,17 @@ export class ScheduleService {
       const status = await Network.getStatus();
       console.log(status.connected);
       if (status.connected) {
+        this.alertAndLoading.presentLoading()
         let schedule: any;
         let url = 'schedule/all';
         this.httpService.get(url, this.authService.currentToken.value).subscribe(
           async (res) => {
-            this.alertAndLoading.presentLoading()
+            
             // console.log(res)
             schedule = res;
             if (schedule) {
               // if (schedule.length != this.allSchedule.value.length) {
-              //   console.log('update');
+                console.log('get schedule from server');
                 this.allSchedule.next(schedule);
               // }
               this.alertAndLoading.dismissLoadling();

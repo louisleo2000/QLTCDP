@@ -27,7 +27,7 @@ class ScheduleController extends Controller
     public function indexAPI(ScheduleDataTable $dataTable)
     {
         //get schedules with vaccines
-        $data =['schedules' => Schedule::with('vaccine')->get()];
+        $data =['schedules' => Schedule::where('status','<>','Đang chuẩn bị')->where('status','<>','Đã kết thúc')->where('status','<>','Đã hủy')-> orderBy('date_time', 'ASC')->with('vaccine')->get()];
         // dd($data['vaccines']);
         return response()->json(['data' => $data]);
     }

@@ -84,6 +84,9 @@ export class AuthService {
       async (error) => {
         console.log(error);
         switch (error.status) {
+          case 400:
+            this.alertAndLoading.presentAlert('Lỗi yêu cầu');
+            break;
           case 401:
             await this.storageService.clear();
             this.userData.next(null);
@@ -109,9 +112,7 @@ export class AuthService {
 
   async getchild(token) {
     if (this.userData.value != null) {
-      if (this.childs.value.length == 0) {
-        this.alertAndLoading.presentLoading();
-      }
+     
       const status = await Network.getStatus();
       console.log(status.connected);
       let reschild = await this.storageService.get(AuthConstants.CHILD);
@@ -133,6 +134,9 @@ export class AuthService {
                 }
               });
               if (childs.length != this.childs.value.length) {
+                if (this.childs.value.length == 0) {
+                  this.alertAndLoading.presentLoading();
+                }
                 console.log('update');
                 this.childs.next(childs);
                 await this.storageService.store(AuthConstants.CHILD, childs);
@@ -168,7 +172,7 @@ export class AuthService {
     if (res) {
       this.userData.next(res);
       this.getchild(token);
-      console.log(res);
+      // console.log(res);
     }
     if (status.connected && token != null) {
       let url = 'auth/me';
@@ -190,6 +194,9 @@ export class AuthService {
           console.log(error);
           this.alertAndLoading.dismissLoadling();
           switch (error.status) {
+            case 400:
+              this.alertAndLoading.presentAlert('Lỗi yêu cầu');
+              break;
             case 401:
               this.alertAndLoading.presentAlert(
                 'Phiên đăng nhập hết hạn.Vui lòng đăng nhập lại'

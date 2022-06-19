@@ -21,6 +21,7 @@ export class AlertAndLoadingService {
     await alert.present();
   }
   async presentLoading() {
+    console.log('loading');
     this.isLoading = await this.loadingController.create({
       message: 'Đợi một chút...',
       duration: 10000,
@@ -28,9 +29,12 @@ export class AlertAndLoadingService {
     this.isLoading.present();
   }
   dismissLoadling() {
-    setTimeout(() => {
+    let i =  setInterval(() => {
       if (this.isLoading) {
         this.isLoading.dismiss();
+        console.log('dismiss');
+        
+        clearInterval(i);
       }
     }, 1000);
   }

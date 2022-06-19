@@ -15,6 +15,10 @@ class VaccinationDetails extends Model
     {
         return $this->belongsTo(MedicalStaff::class,'staff_id');
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class,'staff_id');
+    }
     public function vaccine()
     {
         return $this->belongsTo(Vaccine::class,'vaccine_id');

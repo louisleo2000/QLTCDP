@@ -79,7 +79,7 @@ class ParentDataTable extends DataTable
                     // 'className' => 'bg-warning',
                 ]
             )
-            ->select('id', 'name', 'img', 'created_at', 'updated_at')
+            ->select('single')
             ->language(config('app.datatableLanguage'));
     }
 

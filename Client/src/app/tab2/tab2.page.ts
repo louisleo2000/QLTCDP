@@ -10,6 +10,33 @@ import { DatePipe } from '@angular/common';
 export class Tab2Page {
   allschedule: any = [];
   pipe = new DatePipe('en-US');
+  date ={
+    'day':{
+      'Monday': 'Thứ hai',
+      'Tuesday': 'Thứ ba',
+      'Wednesday': 'Thứ tư',
+      'Thursday': 'Thứ năm',
+      'Friday': 'Thứ sáu',
+      'Saturday': 'Thứ bảy',
+      'Sunday': 'Chủ nhật'
+      
+  
+    },
+    'month':{
+      'January': 'Tháng 1',
+      'February': 'Tháng 2',
+      'March': 'Tháng 3',
+      'April': 'Tháng 4',
+      'May': 'Tháng 5',
+      'June': 'Tháng 6',
+      'July': 'Tháng 7',
+      'August': 'Tháng 8',
+      'September': 'Tháng 9',
+      'October': 'Tháng 10',
+      'November': 'Tháng 11',
+      'December': 'Tháng 12'
+    }
+  }
   searchText;
   constructor(
     private schedule: ScheduleService,
@@ -21,7 +48,7 @@ export class Tab2Page {
   onLoad() {
     this.schedule.getAllSchedule();
     this.schedule.allSchedule.subscribe((res: any) => {
-      if (res.data) {
+      if (res && res.data) {
         // console.log(res.data.schedules);
         res.data.schedules.forEach((element) => {
           //
@@ -31,8 +58,11 @@ export class Tab2Page {
           date = new Date(datetime[0]);
           // console.log(date);
           if (date.toString() != 'Invalid Date') {
-            element.date_time = this.pipe.transform(date, 'EEEE, MMMM dd, y');
-            element.time = datetime[1];
+            let day  = this.pipe.transform(date, 'EEEE');
+            let month = this.pipe.transform(date, 'MMMM');
+            element.date_time = this.pipe.transform(date, 'EEEE, dd-MM-y');
+            element.date_time =  element.date_time.replace(day, this.date.day[day]);
+            element.time = datetime[1].substr(0,datetime[1].length-3);
           }
           // console.log(element.date_time);
         });
