@@ -133,14 +133,14 @@ export class AuthService {
                   e.dob = format(new Date(e.dob), 'dd/MM/yyyy');
                 }
               });
-              if (childs.length != this.childs.value.length) {
+              // if (childs.length != this.childs.value.length) {
                 if (this.childs.value.length == 0) {
                   this.alertAndLoading.presentLoading();
                 }
                 console.log('update');
                 this.childs.next(childs);
                 await this.storageService.store(AuthConstants.CHILD, childs);
-              }
+              // }
 
               this.alertAndLoading.dismissLoadling();
               return true;

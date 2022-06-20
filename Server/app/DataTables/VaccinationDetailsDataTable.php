@@ -72,7 +72,7 @@ class VaccinationDetailsDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            // Column::make('id'),
+            Column::make('id')->className('text-center'),
             Column::make('child.id')->title('ID trẻ')->className('text-center'),
             Column::make('child.health_nsurance_id')->title('Số bảo hiểm y tế')->className('text-center'),
             Column::make('child.name')->title('Tên trẻ')->className('text-center'),

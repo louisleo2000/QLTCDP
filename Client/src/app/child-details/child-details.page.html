@@ -10,7 +10,6 @@
       style="font-size: 25px"
       (click)="isModalOpen = true"
     ></ion-icon>
-    
   </ion-toolbar>
 </ion-header>
 
@@ -53,24 +52,33 @@
         </ion-row>
       </ion-card>
 
-      <ion-card class="bg-white">
+      <ion-card class="bg-white" style="min-height: 300px">
         <ion-list class="bg-white">
           <ion-list-header class="p-0">
-            <ion-col size="8" >
+            <ion-col size="8">
               <ion-label class="text-black"><h1>Tiêm chủng</h1></ion-label>
             </ion-col>
             <ion-col size="4" class="text-end">
-              <a  class="text-info" style="font-size: 14px;">
+              <a
+                class="text-info"
+                style="font-size: 14px"
+                (click)="isHistoryOpen=true"
+              >
                 Lịch sử tiêm
               </a>
             </ion-col>
           </ion-list-header>
-          <ion-item lines="none" color="success">
-            <ion-label>Lao</ion-label>
-            <ion-badge color="warning">1</ion-badge>
-            <ion-badge color="secondary">2</ion-badge>
+          <ion-item
+            lines="none"
+            color="purple"
+            *ngFor="let item of currentChild.counts , let i = index"
+          >
+            <ion-label>{{item.name}}</ion-label>
+            <ion-badge color="success" *ngFor="let el of item.number"
+              >{{el}}</ion-badge
+            >
           </ion-item>
-          <ion-item lines="none"  color="warning">
+          <!-- <ion-item lines="none"  color="warning">
             <ion-label>Viêm gan B</ion-label>
             <ion-badge color="success">1</ion-badge>
             <ion-badge color="secondary">2</ion-badge>
@@ -79,7 +87,7 @@
             <ion-label>Bạch Hầu</ion-label>
             <ion-badge color="warning">1</ion-badge>
             <ion-badge color="secondary">2</ion-badge>
-          </ion-item>
+          </ion-item> -->
         </ion-list>
       </ion-card>
     </div>
@@ -94,7 +102,58 @@
           </ion-buttons>
         </ion-toolbar>
       </ion-header>
-      
+    </ng-template>
+  </ion-modal>
+
+  <ion-modal [isOpen]="isHistoryOpen">
+    <ng-template>
+      <ion-header translucent>
+        <ion-toolbar>
+          <ion-title>Lịch sử tiêm</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="isHistoryOpen = false">Đóng</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <ion-list>
+          <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+            <ion-refresher-content></ion-refresher-content>
+          </ion-refresher>
+          <ion-list-header> Lịch tiêm sắp tới </ion-list-header>
+
+          <ion-searchbar
+            placeholder="Tìm kiếm theo tên vắc-xin"
+            [(ngModel)]="searchText"
+          ></ion-searchbar>
+
+          <ng-container *ngIf="currentChild.vaccination_details.length >0">
+            <ion-item *ngFor="let item of currentChild.vaccination_details | filter:searchText">
+              <div class="col mt-2 mb-2">
+                <ion-label>
+                  <h2><b>{{item.vaccine.name}}</b></h2>
+                  <p>
+                    <ion-text color="dark">
+                      <b>Thời gian:</b> {{item.created_at}}
+                    </ion-text>
+                  </p>
+                  <p>
+                    <ion-text color="dark">
+                      <b>Số lô:</b> {{item.lot_number}}
+                    </ion-text>
+                  </p>
+                  <p>
+                    <ion-text color="dark">
+                      <b>Tiêm lần:</b> {{item.number_injections}}
+                    </ion-text>
+                  </p>
+                </ion-label>
+              </div>
+             
+            </ion-item>
+          </ng-container>
+        </ion-list>
+      </ion-content>
     </ng-template>
   </ion-modal>
 </ion-content>

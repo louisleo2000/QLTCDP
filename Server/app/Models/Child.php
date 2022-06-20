@@ -30,7 +30,10 @@ class Child extends Model
     }
      public function vaccinationsDetails()
     {
-        return( VaccinationDetails::selectRaw(' vaccine_id, COUNT(vaccine_id) as number')->where('child_id', $this->id)->groupBy('vaccine_id')->with('vaccine')->get());
+        return ( VaccinationDetails::selectRaw(' vaccine_id, COUNT(vaccine_id) as number')->where('child_id', $this->id)->groupBy('vaccine_id')->with('vaccine')->get());
     }
-
+    public function vaccine()
+    {
+        return $this->belongsToMany(Vaccine::class,'vaccination_details','child_id','vaccine_id');
+    }
 }

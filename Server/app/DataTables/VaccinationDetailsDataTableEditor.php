@@ -43,6 +43,11 @@ class VaccinationDetailsDataTableEditor extends DataTablesEditor
             // 'name'  => 'sometimes|required',
         ];
     }
+    public function updating(Model $model, array $data)
+    {
+        $model->staff_id = Auth::user()->info->id;
+        return $data;
+    }
 
 
     /**

@@ -152,9 +152,13 @@ class ChildController extends Controller
     public function getMy()
     {
         //
-        $childs = Child:: where('parent_id', '=', Auth::user()->info->id)->load('vaccinationsDetails')->get();
-        
-        return response()->json(['info' => $childs], 200);
+        $childs = Child:: where('parent_id', '=', Auth::user()->info->id)->get();
+        //for each child get the vaccination details
+        foreach ($childs as $child) {
+            $child->vaccination_details = VaccinationDetails::where('child_id', $child->id)->with('vaccine')->get();
+        }
+        // $childs = Child::where('parent_id', '=', Auth::user()->info->id)->with('vaccine','vaccinations')->get();
+        return $childs;
     }
 
     /**
