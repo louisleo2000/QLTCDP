@@ -20,7 +20,7 @@ class ChildrentDataTable extends DataTable
     public function dataTable($query)
     {
         return datatables()
-            ->eloquent($query)
+            ->eloquent($query->with('parent','user'))
             ->setRowId('id')
             ->editColumn('img', function ($parent) {
                 if ($parent->img) {
@@ -83,6 +83,7 @@ class ChildrentDataTable extends DataTable
             Column::make('id')->className('text-center'),
             Column::make('img')->title('Ảnh'),
             Column::make('name')->title('Họ tên'),
+            Column::make('user.email')->title('Họ tên'),
             Column::make('dob')->title('Ngày sinh'),
             Column::make('gender')->title('Giới tính'),
             Column::make('health_nsurance_id')->title('Số bảo hiểm y tế'),
