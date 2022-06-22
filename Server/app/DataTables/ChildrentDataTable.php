@@ -24,7 +24,7 @@ class ChildrentDataTable extends DataTable
             ->setRowId('id')
             ->editColumn('img', function ($parent) {
                 if ($parent->img) {
-                    return '<img  src="' . $parent->img . '" width="100px" height="100px" style="object-fit: contain;">';
+                    return '<img  src="' . $parent->img . '" width="100px" height="100px" style="object-fit: cover;">';
                 } else {
                     return '<img src="https://via.placeholder.com/100x100" width="100px" height="100px">';
                 }

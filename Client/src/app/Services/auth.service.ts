@@ -29,6 +29,7 @@ export class AuthService {
     this.currentToken.next(token);
     // console.log(token)
   }
+  //Hàm đăng nhập
   login(postData: any) {
     this.httpService.post('auth/login', postData).subscribe(
       async (res: any) => {
@@ -67,7 +68,7 @@ export class AuthService {
   signUp(postData: any): Observable<any> {
     return this.httpService.post('auth/register', postData);
   }
-
+//hàm đăng xuất
   async logOut() {
     let token = await this.storageService.get('token');
     this.alertAndLoading.presentLoading();
@@ -109,7 +110,7 @@ export class AuthService {
   addchild(postData: FormData, token: string): Observable<any> {
     return this.httpService.post('child/add', postData, token);
   }
-
+//hàm lấy thông tin các con của người dùng hiện tại
   async getchild(token) {
     if (this.userData.value != null) {
      
@@ -164,7 +165,7 @@ export class AuthService {
       return false;
     }
   }
-
+//Hàm load dữ liệu người dùng
   async loadUser(token) {
     const status = await Network.getStatus();
     let res = await this.storageService.get(AuthConstants.AUTH);
@@ -224,7 +225,7 @@ export class AuthService {
       this.alertAndLoading.dismissLoadling();
     }
   }
-
+//hàm tính tuổi
   calAge(dobDate) {
     let today = new Date();
     let age = {

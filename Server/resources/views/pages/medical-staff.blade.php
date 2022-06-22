@@ -24,7 +24,7 @@
                                 </tr>
                             </thead>
                         </table> --}}
-                        {{ $dataTable->table(['id' => 'parent-table']) }}
+                        {{ $dataTable->table(['id' => 'medicalstaff-table']) }}
                     </div>
                 </div>
             </div>
@@ -82,8 +82,8 @@
                 }
             });
             var editor = new $.fn.dataTable.Editor({
-                ajax: 'parentadmin',
-                table: "#parent-table",
+                ajax: 'medicalstaff',
+                table: "#medicalstaff-table",
                 display: 'bootstrap',
                 fields: [{
                         label: "Họ và tên:",
@@ -154,10 +154,10 @@
                     },
                 }
             });
-            editor.on('initEdit', function() {
-                editor.show(); //Shows all fields
-                editor.hide('user.password'); //Hides a field
-            });
+            // editor.on('initEdit', function() {
+            //     editor.show(); //Shows all fields
+            //     editor.hide('user.password'); //Hides a field
+            // });
             // $('#schedule-table').on('click', 'tbody td:not(:first-child)', function(e) {
             //     editor.inline(this);
             // });

@@ -2,16 +2,16 @@
 
 namespace App\DataTables;
 
-use App\Models\Parents;
+use App\Models\MedicalStaff;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Yajra\DataTables\DataTablesEditor;
 
-class ParentDataTableEditor extends DataTablesEditor
+class MedicalStaffDataTableEditor extends DataTablesEditor
 {
-    protected $model = Parents::class;
+    protected $model = MedicalStaff::class;
 
     /**
      * Get create action validation rules.
@@ -30,6 +30,7 @@ class ParentDataTableEditor extends DataTablesEditor
         $user = User::create([
             'name' => $data['user']['name'],
             'email' => $data['user']['email'],
+            'role' => 2,
             'password' => Hash::make($data['user']['password']),
         ]);
 

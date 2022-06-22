@@ -36,7 +36,7 @@
 
 
                                     <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">Đăng nhập</h4>
-                                    <div class="row mt-3">
+                                    {{-- <div class="row mt-3">
                                         <div class="col-2 text-center ms-auto">
                                             <a class="btn btn-link px-3" href="javascript:;">
                                                 <i class="fa fa-facebook text-white text-lg"></i>
@@ -52,7 +52,7 @@
                                                 <i class="fa fa-google text-white text-lg"></i>
                                             </a>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                             <div class="card-body">

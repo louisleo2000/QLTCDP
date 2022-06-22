@@ -7,7 +7,7 @@
                     <div class="bg-gradient-info shadow-info border-radius-lg pt-4 pb-3">
                         <div class="row">
                             <div class="col">
-                                <h4 class="text-white text-capitalize ps-3">Lịch tiêm chủng</h4>
+                                <h6 class="text-white text-capitalize ps-3">{{$title}}</h6>
                             </div>
                             {{-- <div class="col-md-4 d-flex flex-row-reverse me-2">
                                 <button type="button" class="btn btn-primary mr-2" data-bs-toggle="modal"

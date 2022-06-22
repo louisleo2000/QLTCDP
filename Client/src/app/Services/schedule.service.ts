@@ -17,7 +17,8 @@ export class ScheduleService {
     private router: Router,
     private authService: AuthService,
     private alertAndLoading: AlertAndLoadingService) { }
-
+    
+//Hàm lấy thông tin lịch tiêm chủng
   async getAllSchedule() {
 
       const status = await Network.getStatus();

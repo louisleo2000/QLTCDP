@@ -2,14 +2,14 @@
 
 namespace App\DataTables;
 
-use App\Models\Parents;
+use App\Models\MedicalStaff;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class ParentDataTable extends DataTable
+class MedicalStaffDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -21,10 +21,9 @@ class ParentDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query->with('user'))
-
-            ->addColumn('image', function ($parent) {
-                if ($parent->img) {
-                    return '<img  src="' . $parent->img . '" width="100px" height="100px" style="object-fit: cover;">';
+            ->addColumn('image', function ($medicalstaff) {
+                if ($medicalstaff->img) {
+                    return '<img  src="' . $medicalstaff->img . '" width="100px" height="100px" style="object-fit: cover;">';
                 } else {
                     return '<img src="https://via.placeholder.com/100x100" width="100px" height="100px">';
                 }
@@ -46,10 +45,10 @@ class ParentDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\Parents $model
+     * @param \App\Models\MedicalStaff $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Parents $model)
+    public function query(MedicalStaff $model)
     {
         return $model->newQuery();
     }
@@ -62,25 +61,25 @@ class ParentDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-            ->setTableId('parent-table')
-            ->columns($this->getColumns())
-            ->minifiedAjax()
-            ->dom('Bfrtip')
-            ->orderBy(1)
-            ->buttons(
-                Button::make('create')->editor('editor'),
-                Button::make('edit')->editor('editor'),
-                Button::make('remove')->editor('editor'),
-                Button::make('print')->text('In'),
-                Button::make('colvis')->text('Cột'),
-                [
-                    'extend' => 'csv',
-                    'split' => ['pdf', 'excel'],
-                    // 'className' => 'bg-warning',
-                ]
-            )
-            ->select('single')
-            ->language(config('app.datatableLanguage'));
+                    ->setTableId('medicalstaff-table')
+                    ->columns($this->getColumns())
+                    ->minifiedAjax()
+                    ->dom('Bfrtip')
+                    ->orderBy(1)
+                    ->buttons(
+                        Button::make('create')->editor('editor'),
+                        Button::make('edit')->editor('editor'),
+                        Button::make('remove')->editor('editor'),
+                        Button::make('print')->text('In'),
+                        Button::make('colvis')->text('Cột'),
+                        [
+                            'extend' => 'csv',
+                            'split' => ['pdf', 'excel'],
+                            // 'className' => 'bg-warning',
+                        ]
+                    )
+                    ->select('single')
+                    ->language(config('app.datatableLanguage'));
     }
 
     /**
@@ -98,7 +97,7 @@ class ParentDataTable extends DataTable
             Column::make('gender')->title('Giới tính')->className('text-center text-uppercase'),
             Column::make('tel')->title('Điện thoại')->defaultContent('Chưa cập nhật'),
             Column::make('citizen_id')->title('CCCD/CMND')->defaultContent('Chưa cập nhật'),
-            Column::make('adress')->title('Địa chỉ')->defaultContent('Chưa cập nhật'),
+            // Column::make('adress')->title('Địa chỉ')->defaultContent('Chưa cập nhật'),
             Column::make('created_at')->title('Ngày tạo')->defaultContent('Chưa cập nhật'),
             Column::make('updated_at')->title('Ngày cập nhật')->defaultContent('Chưa cập nhật'),
         ];
@@ -111,6 +110,6 @@ class ParentDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Parent_' . date('YmdHis');
+        return 'MedicalStaff_' . date('YmdHis');
     }
 }
