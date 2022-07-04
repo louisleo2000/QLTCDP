@@ -24,7 +24,7 @@
         </div>
     </div>
 @stop
-<div id="customForm">
+<div id="customForm" style="display: none">
     <fieldset>
         <div data-editor-template="name"></div>
         {{-- <div data-editor-template="last_name"></div> --}}

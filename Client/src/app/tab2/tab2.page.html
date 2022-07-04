@@ -1,6 +1,9 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title> Lịch tiêm chủng </ion-title>
+    <ion-buttons slot="end">
+      <ion-icon name="calendar" id="open-modal-schedule"></ion-icon>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -9,38 +12,69 @@
     <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
-    <ion-list-header> Lịch tiêm sắp tới </ion-list-header>
+    <!-- <ion-list-header>
+      <ion-toolbar>
+        <ion-title>Lịch tiêm sắp tới</ion-title>
+       
+      </ion-toolbar>
+    </ion-list-header> -->
 
     <ion-searchbar
-      placeholder="Tìm kiếm theo tên vắc-xin"
+      placeholder="Tìm kiếm lịch tiêm"
       [(ngModel)]="searchText"
     ></ion-searchbar>
 
     <ng-container *ngIf="allschedule.length >0">
       <ion-item *ngFor="let item of allschedule | filter:searchText">
-        <div class="col-8 mt-2 mb-2">
-          <ion-label>
-            <h2><b>{{item.vaccine.name}}</b></h2>
-            <p>
-              <ion-text color="dark">
-                <b>Thời gian:</b> {{item.date_time}}
-              </ion-text>
-            </p>
-            <p>
-              <ion-text color="dark">
-                <b>Bắt đầu lúc:</b> {{item.time}}
-              </ion-text>
-            </p>
-            <p>
-              <ion-text color="dark">
-                <b>Độ tuổi tiêm:</b> {{item.vaccine.age_distance}}
-                {{item.vaccine.age_type}}
-              </ion-text>
-            </p>
-          </ion-label>
-        </div>
-        <div class="col"><ion-label>{{item.status}}</ion-label> </div>
+        <ion-card class="w-100" color="light">
+          <ion-item-divider>
+            <div class="col-7">
+              <ion-label> Vắc-xin: {{item.vaccine.name}} </ion-label>
+            </div>
+            <div class="col-5">
+              <ion-label>{{item.status}}</ion-label>
+            </div>
+          </ion-item-divider>
+
+          <ion-card-content >
+            <ion-label>
+              <p>
+                <ion-text color="dark">
+                  <b>Độ tuổi tiêm:</b> {{item.vaccine.age_distance}}
+                  {{item.vaccine.age_type}}
+                </ion-text>
+              </p>
+              <p>
+                <ion-text color="dark">
+                  <b>Thời gian:</b> {{item.date_time}}
+                </ion-text>
+              </p>
+              <p>
+                <ion-text color="dark">
+                  <b>Bắt đầu lúc:</b> {{item.time}}
+                </ion-text>
+              </p>
+              <p>
+                <ion-text color="dark">
+                  <b>Địa điểm:</b> Trạm y tế địa phương
+                </ion-text>
+              </p>
+            </ion-label>
+          </ion-card-content>
+        </ion-card>
       </ion-item>
     </ng-container>
   </ion-list>
+
+  <ion-modal trigger="open-modal-schedule">
+    <ng-template>
+      <ion-content force-overscroll="false">
+        <ion-datetime
+          #datetime
+          (ionChange)="onChange(datetime.value)"
+          [max]="maxDate"
+        ></ion-datetime>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>

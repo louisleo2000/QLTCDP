@@ -47,7 +47,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-   
+
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
@@ -87,12 +87,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
     <script src="//cdn.datatables.net/plug-ins/1.12.1/i18n/vi.json"></script>
-    {{-- <script src="{{ asset('vendor/laravel-filemanager/js/cropper.min.js') }}"></script>
+    <script src="{{ asset('vendor/laravel-filemanager/js/cropper.min.js') }}"></script>
     <script src="{{ asset('vendor/laravel-filemanager/js/dropzone.min.js') }}"></script>
-    <script src="{{ asset('vendor/laravel-filemanager/js/stand-alone-button.js') }}"></script> --}}
+    <script src="{{ asset('vendor/laravel-filemanager/js/stand-alone-button.js') }}"></script>
     {{-- <script src="/vendor/datatables/buttons.server-side.js"></script> --}}
     <!--   Core JS Files   -->
- 
+
     {{-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script> --}}
     {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
@@ -139,6 +139,20 @@
                 "sortAscending": ": sắp xếp tăng dần",
                 "sortDescending": ": sắp xép giảm dần"
             }
+        }
+    </script>
+    <script>
+        function setImgHolder(editor) {
+            editor.dependent('img', function(val, data, callback) {
+                if (val != '') {
+                    $('#holder').css('display', 'block')
+                    // console.log(val);
+                    $('#holder img').attr('src', val)
+                } else {
+                    $('#holder').css('display', 'none')
+                }
+                return {};
+            });
         }
     </script>
     @stack('scripts')
