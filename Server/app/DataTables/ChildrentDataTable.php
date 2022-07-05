@@ -22,14 +22,30 @@ class ChildrentDataTable extends DataTable
         return datatables()
             ->eloquent($query->with('parent','user'))
             ->setRowId('id')
-            ->editColumn('img', function ($parent) {
+            ->addColumn('c_img', function ($parent) {
                 if ($parent->img) {
                     return '<img  src="' . $parent->img . '" width="100px" height="100px" style="object-fit: cover;">';
                 } else {
                     return '<img src="https://via.placeholder.com/100x100" width="100px" height="100px">';
                 }
             })
-            ->rawColumns(['img']);
+            ->editColumn('height', function ($parent) {
+                return $parent->height . ' cm';
+            })
+            ->editColumn('weight', function ($parent) {
+                return $parent->weight . ' kg';
+            })
+            ->editColumn('created_at', function ($customer) {
+                if ($customer->created_at) {
+                    return $customer->created_at->format('d/m/Y H:i:s');
+                }
+            })
+            ->editColumn('updated_at', function ($customer) {
+                if ($customer->updated_at) {
+                    return $customer->updated_at->format('d/m/Y H:i:s');
+                }
+            })
+            ->rawColumns(['c_img']);
     }
 
     /**
@@ -55,7 +71,7 @@ class ChildrentDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')
-                    ->orderBy(1)
+                    // ->orderBy(1)
                     ->buttons(
                         Button::make('create')->editor('editor'),
                         Button::make('edit')->editor('editor'),
@@ -81,16 +97,17 @@ class ChildrentDataTable extends DataTable
     {
         return [
             Column::make('id')->className('text-center'),
-            Column::make('img')->title('Ảnh'),
+            Column::make('c_img')->title('Ảnh'),
             Column::make('name')->title('Họ tên'),
-            Column::make('user.email')->title('Họ tên'),
-            Column::make('dob')->title('Ngày sinh'),
+            Column::make('user.email')->title('Email phụ huynh'),
+            Column::make('dob')->title('Ngày sinh')->className('text-center'),
             Column::make('gender')->title('Giới tính'),
             Column::make('health_nsurance_id')->title('Số bảo hiểm y tế'),
             Column::make('height')->title('Chiều cao')->className('text-center'),
             Column::make('weight')->title('Cân nặng')->className('text-center'),
-            Column::make('created_at')->title('Ngày tạo'),
-            Column::make('updated_at')->title('Ngày cập nhật'),
+            Column::make('created_at')->title('Ngày tạo')->className('text-center'),
+            Column::make('updated_at')->title('Ngày cập nhật')->className('text-center'),
+            // Column::make('img')->searchable(true)->visible(false)->title(''),
         ];
     }
 

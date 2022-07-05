@@ -19,7 +19,7 @@ class ChildrentDataTableEditor extends DataTablesEditor
     public function createRules()
     {
         return [
-            // 'email' => 'required|email|unique:' . $this->resolveModel()->getTable(),
+            'user.email' => 'required|email|unique:users',
             'name'  => 'required',
         ];
     }

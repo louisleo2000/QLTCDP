@@ -10,72 +10,56 @@
                 </div>
                 <div class="card-body px-3 pb-2">
                     <div class="table-responsive p-0">
-                        {{-- <table class="table align-items-center justify-content-center mb-0 text-center text-capitalize"
-                            id="childs-table">
-                            <thead>
-                                <tr>
-                                    <th>id</th>
-                                    <th> Họ và tên</th>
-                                    <th>Giới tính</th>
-                                    <th> Ngày sinh</th>
-                                    <th>Chiều cao(cm)</th>
-                                    <th>Cân nặng(kg)</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                        </table> --}}
                         {{ $dataTable->table(['id' => 'parent-table']) }}
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <div style="display: none">
+        <div id="customForm">
+            <fieldset>
+                <div data-editor-template="user.name"></div>
+            </fieldset>
+            <fieldset>
+                <div data-editor-template="user.email"></div>
+            </fieldset>
+            <fieldset>
+                <div data-editor-template="user.password"></div>
+            </fieldset>
+            <fieldset>
+                <div data-editor-template="gender"></div>
+            </fieldset>
+            <fieldset>
+                <div class="input-group mb-3">
+                    <div class="col" data-editor-template="img"></div>
+                    <div class="input-group-append">
+                        <button id="lfm"  style="width: 120px; height: 44px; margin-top: 41px"
+                            data-input="DTE_Field_img" data-preview="holder" class="lfm btn btn-secondary text-white p-0"> <i
+                                class="fas fa-image "></i>Chọn
+                            ảnh</button>
+                    </div>
+                </div>
+                <div id="holder" style="margin-top:15px;max-height:200px;display: none"><img style="height: 12rem;">
+                </div>
+            </fieldset>
+            <fieldset>
+                <div data-editor-template="citizen_id"></div>
+            </fieldset>
+            <fieldset>
+                <div data-editor-template="tel"></div>
+            </fieldset>
+            <fieldset>
+                <div data-editor-template="adress"></div>
+            </fieldset>
+        </div>
+    </div>
+
 @stop
-{{-- @push('scripts')
-    <script>
-        $(function() {
-            $('#childs-table').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: '{!! route('child.all') !!}',
-                language:language,
-                columns: [{
-                        data: 'id',
-                        name: 'id'
-                    },
-                    {
-                        data: 'name',
-                        name: 'name'
-                    },
-                    {
-                        data: 'gender',
-                        name: 'gender'
-                    },
-                    {
-                        data: 'dob',
-                        name: 'dob'
-                    },
-                    {
-                        data: 'height',
-                        name: 'height'
-                    },
-                    {
-                        data: 'weight',
-                        name: 'weight'
-                    },
-                    {
-                        orderable: false,
-                        data: 'editbtn',
-                        name: 'editbtn'
-                    },
-                ]
-            });
-        });
-    </script>
-@endpush --}}
 @push('scripts')
     <script>
         $(function() {
+            $('#lfm').filemanager('image');
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -84,6 +68,7 @@
             var editor = new $.fn.dataTable.Editor({
                 ajax: 'parentadmin',
                 table: "#parent-table",
+                template: '#customForm',
                 display: 'bootstrap',
                 fields: [{
                         label: "Họ và tên:",
@@ -162,7 +147,7 @@
             //     editor.inline(this);
             // });
             {{ $dataTable->generateScripts() }}
-
+            setImgHolder(editor)
         });
     </script>
 @endpush

@@ -52,7 +52,7 @@
             var editor = new $.fn.dataTable.Editor({
                 ajax: 'vaccine',
                 table: "#vaccine-table",
-                template: '#customForm',
+                // template: '#customForm',
                 display: 'bootstrap',
                 fields: [{
                         label: "Tên Vắc-xin:",

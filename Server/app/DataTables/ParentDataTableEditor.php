@@ -21,8 +21,12 @@ class ParentDataTableEditor extends DataTablesEditor
     public function createRules()
     {
         return [
-            'user.email' => 'required|email',
+            'user.email' => 'required|email|unique:users,email',
             'user.name'  => 'required',
+            'user.password' => 'required|min:8',
+            'citizen_id'  => 'nullable|max:12|min:9|unique:parents|regex:/^[0-9]*$/',
+            'img'  => 'nullable|max:255',
+            'adress'  => 'nullable|max:255|min:5|regex:/^[A-Za-z0-9\.\-\s\,]*$/',
         ];
     }
     public function creating(Model $model, array $data)
@@ -48,11 +52,12 @@ class ParentDataTableEditor extends DataTablesEditor
             // 'email' => 'sometimes|required|email|' . Rule::unique($model->getTable())->ignore($model->getKey()),
             'user.name'  => 'required|max:255',
             'tel'  => 'nullable|regex:/\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/|max:11|min:10',
-            'user.email' => 'required|email',
+            'user.email' => 'required|email|unique:users,email,'.$model->user_id,
             'user.password' => 'nullable|min:8',
-            'adress'  => 'nullable|max:255|min:5',
-            'citizen_id'  => 'nullable|max:12|min:9|regex:/^[0-9]*$/',
-            'gender' => 'required'
+            'adress'  => 'nullable|max:255|min:5|regex:/^[A-Za-z0-9\.\-\s\,]*$/',
+            'citizen_id'  => 'nullable|max:12|min:9|regex:/^[0-9]*$/|unique:parents,citizen_id,'.$model->id,
+            'gender' => 'required',
+            'img'  => 'nullable|max:255',
         ];
     }
     public function updating(Model $model, array $data)

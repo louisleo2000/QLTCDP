@@ -52,10 +52,6 @@
             <fieldset>
                 <div data-editor-template="adress"></div>
             </fieldset>
-            <fieldset class="hr">
-                <div data-editor-template="description"></div>
-            </fieldset>
-
         </div>
     </div>
 

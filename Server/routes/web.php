@@ -6,6 +6,7 @@ use App\Http\Controllers\api\v1\ParentController;
 use App\Http\Controllers\api\v1\ScheduleController;
 use App\Http\Controllers\api\v1\VaccinationDetailsController;
 use App\Http\Controllers\ChildrentController;
+use App\Http\Controllers\OAuthGGController;
 use App\Http\Controllers\ParentAdminController;
 use App\Http\Controllers\VaccineController;
 use Illuminate\Support\Facades\Route;
@@ -28,6 +29,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('dashboard');
 })->middleware(['auth:web','admin:web'])->name('home');
+
+Route::get('/ouauth', [OAuthGGController::class,'index'])->name('oauth');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
