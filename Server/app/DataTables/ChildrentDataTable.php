@@ -71,7 +71,7 @@ class ChildrentDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')
-                    // ->orderBy(1)
+                    ->orderBy(1)
                     ->buttons(
                         Button::make('create')->editor('editor'),
                         Button::make('edit')->editor('editor'),
@@ -84,7 +84,7 @@ class ChildrentDataTable extends DataTable
                             // 'className' => 'bg-warning',
                         ]
                     )
-                    ->select('single')
+                    ->select('os')
                     ->language(config('app.datatableLanguage'));
     }
 

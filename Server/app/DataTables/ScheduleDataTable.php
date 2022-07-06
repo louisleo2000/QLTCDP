@@ -71,7 +71,7 @@ class ScheduleDataTable extends DataTable
                 ]
             )
             ->orderBy(2,'asc')
-            ->select(true)
+            ->select('os')
             ->language(config('app.datatableLanguage'));
     }
 

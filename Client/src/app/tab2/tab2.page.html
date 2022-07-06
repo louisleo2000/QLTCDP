@@ -1,8 +1,8 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title> Lịch tiêm chủng </ion-title>
-    <ion-buttons slot="end">
-      <ion-icon name="calendar" id="open-modal-schedule"></ion-icon>
+    <ion-buttons slot="end" class="ion-margin-end">
+      <ion-icon name="calendar" style="font-size: 25px;" id="open-modal-schedule"></ion-icon>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -29,7 +29,7 @@
         <ion-card class="w-100" color="light">
           <ion-item-divider>
             <div class="col-7">
-              <ion-label> Vắc-xin: {{item.vaccine.name}} </ion-label>
+              <ion-label class="font-weight-bold"> Vắc-xin: {{item.vaccine.name}} </ion-label>
             </div>
             <div class="col-5">
               <ion-label>{{item.status}}</ion-label>

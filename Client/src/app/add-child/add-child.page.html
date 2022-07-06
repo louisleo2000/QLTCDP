@@ -7,58 +7,127 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content color = "light">
+<ion-content color="light">
   <form [formGroup]="addChildForm" (ngSubmit)="onSubmit()">
     <ion-row>
       <ion-col size="12">
-        <ion-item color = "light">
+        <ion-item color="light">
           <ion-label position="floating"
             >Họ và tên <ion-text color="danger">*</ion-text></ion-label
           >
-          <ion-input required formControlName="name" type="text" (change)="onChange($event)"></ion-input>
+          <ion-input
+            autocapitalize="words"
+            required
+            formControlName="name"
+            type="text"
+            (change)="onChange($event)"
+          ></ion-input>
         </ion-item>
-        <ion-item color = "light">
+        <!-- error message -->
+        <div class="text-danger">
+          <ng-container *ngFor="let validation of enMsg.name">
+            <div
+              class="error-message"
+              *ngIf="addChildForm.get('name').hasError(validation.type) && (addChildForm.get('name').dirty ||addChildForm.get('name').touched)"
+            >
+              <ion-icon name="information-circle-outline"></ion-icon>
+              <span>{{ validation.message }}</span>
+            </div>
+          </ng-container>
+        </div>
+        <ion-item color="light">
           <ion-label position="floating"
-            >Số bảo hiểm y tế <ion-text color="danger" >*</ion-text></ion-label
+            >Số bảo hiểm y tế <ion-text color="danger">*</ion-text>(vd:
+            GD1234567890987)</ion-label
           >
-          <ion-input oninput="this.value = this.value.toUpperCase()" required formControlName="health_nsurance_id" type="text" (change)="onChange($event)" ></ion-input>
+          <ion-input
+            oninput="this.value = this.value.toUpperCase()"
+            required
+            formControlName="health_nsurance_id"
+            type="text"
+            (change)="onChange($event)"
+          ></ion-input>
         </ion-item>
+        <!-- error message -->
+        <div class="text-danger">
+          <ng-container *ngFor="let validation of enMsg.health_nsurance_id">
+            <div
+              class="error-message"
+              *ngIf="addChildForm.get('health_nsurance_id').hasError(validation.type) && (addChildForm.get('health_nsurance_id').dirty ||addChildForm.get('health_nsurance_id').touched)"
+            >
+              <ion-icon name="information-circle-outline"></ion-icon>
+              <span>{{ validation.message }}</span>
+            </div>
+          </ng-container>
+        </div>
         <ion-row>
           <ion-col size="6">
-            <ion-item color = "light">
-              <ion-label position="floating">Chiều cao(cm) </ion-label>
+            <ion-item color="light">
+              <ion-label position="floating"
+                >Chiều cao(cm) <ion-text color="danger">*</ion-text>
+              </ion-label>
               <ion-input
                 required
                 formControlName="height"
                 type="number"
               ></ion-input>
             </ion-item>
+            <!-- error message -->
+            <div class="text-danger">
+              <ng-container *ngFor="let validation of enMsg.height">
+                <div
+                  class="error-message"
+                  *ngIf="addChildForm.get('height').hasError(validation.type) && (addChildForm.get('height').dirty ||addChildForm.get('height').touched)"
+                >
+                  <ion-icon name="information-circle-outline"></ion-icon>
+                  <span>{{ validation.message }}</span>
+                </div>
+              </ng-container>
+            </div>
           </ion-col>
 
           <ion-col size="6">
-            <ion-item color = "light">
-              <ion-label position="floating">Cân nặng(kg) </ion-label>
+            <ion-item color="light">
+              <ion-label position="floating"
+                >Cân nặng(kg) <ion-text color="danger">*</ion-text>
+              </ion-label>
               <ion-input
                 required
                 formControlName="weight"
                 type="number"
               ></ion-input>
             </ion-item>
+            <!-- error message -->
+            <div class="text-danger">
+              <ng-container *ngFor="let validation of enMsg.weight">
+                <div
+                  class="error-message"
+                  *ngIf="addChildForm.get('weight').hasError(validation.type) && (addChildForm.get('weight').dirty ||addChildForm.get('weight').touched)"
+                >
+                  <ion-icon name="information-circle-outline"></ion-icon>
+                  <span>{{ validation.message }}</span>
+                </div>
+              </ng-container>
+            </div>
           </ion-col>
         </ion-row>
 
-        <ion-radio-group  formControlName="gender">
-          <ion-label><h2 style="margin-left: 12px;">Giới tính</h2></ion-label>
+        <ion-radio-group formControlName="gender">
+          <ion-label
+            ><h2 style="margin-left: 12px">
+              Giới tính <ion-text color="danger">*</ion-text>
+            </h2></ion-label
+          >
           <ion-row>
             <ion-col size="4">
-              <ion-item color = "light" lines="none">
+              <ion-item color="light" lines="none">
                 <ion-label>Nam</ion-label>
                 <ion-radio value="nam"> </ion-radio>
               </ion-item>
             </ion-col>
 
             <ion-col size="4">
-              <ion-item color = "light" lines="none">
+              <ion-item color="light" lines="none">
                 <ion-label>Nữ</ion-label>
                 <ion-radio style="margin-left: 10px" value="nữ"></ion-radio>
               </ion-item>
@@ -66,14 +135,40 @@
           </ion-row>
         </ion-radio-group>
 
-        <ion-item color = "light">
-          <ion-label position="stacked">Hình ảnh</ion-label>
-          <ion-input required placeholder="Upload Image" type="file" (change)="onImageSelected($event)" accept ="image/*" capture="environment"></ion-input>
-          <ion-img [src]="imageUrl" style="width: 200px;height: auto;"></ion-img>
+        <ion-item color="light">
+          <ion-label position="stacked"
+            >Hình ảnh <ion-text color="danger">*</ion-text></ion-label
+          >
+          <ion-input
+            required
+            placeholder="Upload Image"
+            type="file"
+            (change)="onImageSelected($event)"
+            accept="image/*"
+            capture="environment"
+          ></ion-input>
+          <ion-img
+            [src]="imageUrl"
+            style="width: 200px; height: auto"
+          ></ion-img>
         </ion-item>
+        <!-- error message -->
+        <!-- <div class="text-danger">
+          <ng-container *ngFor="let validation of enMsg.img">
+            <div
+              class="error-message"
+              *ngIf="addChildForm.get('image').hasError(validation.type) && (addChildForm.get('image').dirty ||addChildForm.get('image').touched)"
+            >
+              <ion-icon name="information-circle-outline"></ion-icon>
+              <span>{{ validation.message }}</span>
+            </div>
+          </ng-container>
+        </div> -->
 
-        <ion-item color = "light" lines="none" id="open-modal">
-          <ion-label><h2>Ngày sinh</h2></ion-label>
+        <ion-item color="light" lines="none" id="open-modal">
+          <ion-label
+            ><h2>Ngày sinh <ion-text color="danger">*</ion-text></h2></ion-label
+          >
           <ion-text slot="end">
             {{pickdate.short}}
             <span style="color: rgb(155, 152, 152)">(dd-MM-yyyy)</span>
@@ -88,7 +183,8 @@
                 color="secondary"
                 [value]="pickdate.full"
                 (ionChange)="dataChange(datetime.value)"
-                min="2000-01-01" [max]="now"
+                min="2000-01-01"
+                [max]="now"
               ></ion-datetime>
             </ion-content>
           </ng-template>

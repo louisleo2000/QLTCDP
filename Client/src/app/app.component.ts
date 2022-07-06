@@ -1,3 +1,4 @@
+import { FcmService } from './Services/fcm.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor() {}
+  constructor(private fcmService: FcmService) {
+    this.initializeApp();
+  }
+
+  initializeApp() {
+    this.fcmService.initPush();
+  }
 }

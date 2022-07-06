@@ -21,7 +21,17 @@ class VaccinationDetailsDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query->with('medicalStaff', 'vaccine', 'child', 'user'))
-            ->setrowId('id');
+            ->setrowId('id')
+            ->editColumn('created_at', function ($customer) {
+                if ($customer->created_at) {
+                    return $customer->created_at->format('d/m/Y');
+                }
+            })
+            ->editColumn('updated_at', function ($customer) {
+                if ($customer->updated_at) {
+                    return $customer->updated_at->format('d/m/Y');
+                }
+            });
     }
 
     /**
@@ -60,7 +70,7 @@ class VaccinationDetailsDataTable extends DataTable
                     // 'className' => 'bg-warning',
                 ]
             )
-            ->select('single')
+            ->select('os')
             ->language(config('app.datatableLanguage'));
     }
 

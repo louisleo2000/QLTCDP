@@ -26,25 +26,17 @@
                 <ion-card-header>
                   <h1 class="text-start">{{item.name}}</h1>
                   <div class="row">
-                    <ion-label
-                      *ngIf="item.age.year >0"
-                      class="text-start"
-                    >
-                      {{item.age.year}} tuổi
-                   
-                    <span
-                      *ngIf="item.age.year > 0 && item.age.month > 0"
-                      class="text-start"
-                    >
-                      {{item.age.month}} tháng
-                    </span>
-                    <span
-                      *ngIf="item.age.month == 0 && item.age.year == 0"
-                      class="text-start"
-                    >
-                      {{item.age.day}} ngày
-                    </span>
-                  </ion-label>
+                    <ion-label *ngIf="item.age.day >=0" class="text-start">
+                      <span *ngIf="item.age.year > 0" class="text-start">
+                        {{item.age.year}} tuổi
+                      </span>
+                      <span *ngIf="item.age.month > 0" class="text-start">
+                        {{item.age.month}} tháng
+                      </span>
+                      <span *ngIf="item.age.year <= 0 && item.age.day > 0" class="text-start">
+                        {{item.age.day}} ngày tuổi
+                      </span>
+                    </ion-label>
                   </div>
                 </ion-card-header>
               </div>

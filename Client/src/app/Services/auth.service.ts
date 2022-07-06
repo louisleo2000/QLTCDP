@@ -110,12 +110,16 @@ export class AuthService {
   addchild(postData: FormData, token: string): Observable<any> {
     return this.httpService.post('child/add', postData, token);
   }
+
+  editchild(postData: FormData, token: string): Observable<any> {
+    return this.httpService.post('child/edit', postData, token);
+  }
 //hàm lấy thông tin các con của người dùng hiện tại
   async getchild(token) {
     if (this.userData.value != null) {
      
       const status = await Network.getStatus();
-      console.log(status.connected);
+      console.log('Online: '+ status.connected);
       let reschild = await this.storageService.get(AuthConstants.CHILD);
       if (reschild.length != this.childs.value.length) {
         this.childs.next(reschild);
@@ -138,7 +142,7 @@ export class AuthService {
                 if (this.childs.value.length == 0) {
                   this.alertAndLoading.presentLoading();
                 }
-                console.log('update');
+                console.log('Data children update');
                 this.childs.next(childs);
                 await this.storageService.store(AuthConstants.CHILD, childs);
               // }
@@ -248,6 +252,7 @@ export class AuthService {
       age.year = age.year + 1;
       age.month = 0;
     }
+    // console.log(age);
     return age;
   }
 }

@@ -47,10 +47,10 @@ class ChildController extends Controller
                         </div>';
             })
             ->editColumn('dob', function ($child) {
-                $date=date_create($child->dob);
-                return date_format($date,"d-m-Y");
+                $date = date_create($child->dob);
+                return date_format($date, "d-m-Y");
             })
-            ->rawColumns(['editbtn','name'])
+            ->rawColumns(['editbtn', 'name'])
             ->make(true);
     }
 
@@ -63,9 +63,8 @@ class ChildController extends Controller
     public function create(Request $request)
     {
         //
-        $d1 = date('U');;
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:70'],
             'gender' => ['required'],
             'weight' => ['required'],
             'height' => ['required'],
@@ -77,7 +76,7 @@ class ChildController extends Controller
         if ($child) {
             return response()->json(['message' => 'Thông tin trẻ em này đã có trong kho dữ liệu'], 400);
         }
-        $child = Child::where('health_nsurance_id' , $request->health_nsurance_id)->first();
+        $child = Child::where('health_nsurance_id', $request->health_nsurance_id)->first();
         if ($child) {
             return response()->json(['message' => 'Số bảo hiểm y tế đã được sử dụng'], 400);
         }
@@ -86,11 +85,11 @@ class ChildController extends Controller
             //get name and port of server
             $serverName = "http://" . $_SERVER['SERVER_NAME'] . ":" . $_SERVER['SERVER_PORT'];
             //get file name
-            $fileName = Auth::user()->info->id . $request['dob']. "." . $request->file('img')->getClientOriginalExtension();
+            $fileName = Auth::user()->info->id . $request['dob'] . "." . $request->file('img')->getClientOriginalExtension();
             $img = Image::make($request->file('img')->path());
             $img->resize(350, 400, function ($const) {
                 $const->aspectRatio();
-            })->save(public_path('storage/img').'/'.$fileName);
+            })->save(public_path('storage/img') . '/' . $fileName);
             //save img in storage public/img
             // $request->file('img')->storeAs('public/img', $fileName);
             $path = $serverName . "/storage" . '/img/' . $fileName;
@@ -152,7 +151,7 @@ class ChildController extends Controller
     public function getMy()
     {
         //
-        $childs = Child:: where('parent_id', '=', Auth::user()->info->id)->get();
+        $childs = Child::where('parent_id', '=', Auth::user()->info->id)->get();
         //for each child get the vaccination details
         foreach ($childs as $child) {
             $child->vaccination_details = VaccinationDetails::where('child_id', $child->id)->with('vaccine')->get();
@@ -174,15 +173,60 @@ class ChildController extends Controller
     }
 
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Child  $child
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Child $child)
+    public function edit(Request $request)
     {
         //
+        // dd($request->all());
+
+        $request->validate([
+            'child_id' => ['required'],
+            'name' => ['required', 'string', 'max:70'],
+            'gender' => ['required'],
+            'weight' => ['required'],
+            'height' => ['required'],
+            'dob' => ['required'],
+            'health_nsurance_id' => ['required']
+        ]);
+        //verify if the child is already in the database
+        $child = Child::find($request->child_id);
+        if ($child) {
+
+            if ($request->hasFile('img')) {
+                //get name and port of server
+                $serverName = "http://" . $_SERVER['SERVER_NAME'] . ":" . $_SERVER['SERVER_PORT'];
+                //get file name
+                $fileName = Auth::user()->info->id . $request['dob'] . "." . $request->file('img')->getClientOriginalExtension();
+                $img = Image::make($request->file('img')->path());
+                $img->resize(350, 400, function ($const) {
+                    $const->aspectRatio();
+                })->save(public_path('storage/img') . '/' . $fileName);
+                //save img in storage public/img
+                // $request->file('img')->storeAs('public/img', $fileName);
+                $path = $serverName . "/storage" . '/img/' . $fileName;
+                // return response()->json(['success' => $path],200);
+                $img = $path;
+            } else if ($request->img == null) {
+                $img = $child->img;
+            } else {
+                // return response()->json(['error' => 'File not found'],404);
+                $img = null;
+            }
+
+            $child->update([
+                'name' => $request->name,
+                'parent_id' => Auth::user()->info->id,
+                'gender' =>  $request->gender,
+                'weight' => $request->weight,
+                'height' => $request->height,
+                'dob' => $request->dob,
+                'img' => $img,
+                'health_nsurance_id' => $request->health_nsurance_id
+            ]);
+
+            return response()->json(['success' => $child], 200);
+        } else {
+            return response()->json(['message' => 'Không tìm thấy trẻ'], 400);
+        }
     }
 
     /**

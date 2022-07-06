@@ -27,10 +27,41 @@ export class AddChildPage implements OnInit {
   height: FormControl;
   dob: FormControl;
   health_nsurance_id: FormControl;
-  now =format(new Date(), 'yyyy-MM-dd');
+  now = format(new Date(), 'yyyy-MM-dd');
   pickdate = {
     short: format(new Date(), 'dd-MM-yyyy'),
     full: format(new Date(), 'yyyy-MM-dd') + 'T09:00:00.000Z',
+  };
+  enMsg = {
+    name: [
+      { type: 'required', message: 'Họ và tên không được trống' },
+      { type: 'minlength', message: 'Họ và tên phải có ít nhất 2 ký tự' },
+      { type: 'maxlength', message: 'Họ và tên không được quá 70 ký tự' },
+      { type: 'pattern', message: 'Họ và tên không được chứa số hoặc ký tự đặc biệt' },
+    ],
+    health_nsurance_id: [
+      { type: 'required', message: 'Số bảo hiểm y tế không được trống' },
+      { type: 'minlength', message: 'Số bảo hiểm y tế phải có ít nhất 15 ký tự' },
+      { type: 'maxlength', message: 'Số bảo hiểm y tế không được quá 15 ký tự' },
+      { type: 'pattern', message: 'Số bảo hiểm y tế không đúng định dạng' },
+    ],
+    // img: [{ type: 'required', message: 'Bạn chưa chọn ảnh' }],
+    gender: [{ type: 'required', message: 'Giới tính không được trống' }],
+    dob: [{ type: 'required', message: 'Bạn chưa chọn ngày sinh' }],
+    weight: [
+      { type: 'required', message: 'Cân nặng không được trống' }, 
+      { type: 'max', message: 'Cân nặng trẻ không được lớn hơn 200kg' },
+      { type: 'min', message: 'Cân nặng trẻ phải trên 0kg' },
+    ],
+    height: [
+      { type: 'required', message: 'Chiều cao không được trống' },
+      { type: 'max', message: 'Chiều cao trẻ không được lớn hơn 300cm' },
+      { type: 'min', message: 'Chiều cao trẻ phải trên 0cm' },
+    ],
+    passport_expiry_date: [
+      { type: 'required', message: 'Please select passport expiry date' },
+    ],
+    club_id: [{ type: 'required', message: 'Please select club' }],
   };
 
   constructor(
@@ -42,7 +73,9 @@ export class AddChildPage implements OnInit {
     this.name = new FormControl('', [
       Validators.required,
       Validators.minLength(2),
+      Validators.maxLength(70),
       Validators.pattern(/[\S]/),
+      Validators.pattern(/^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂẾưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\s\W|_]+$/),
     ]);
 
     this.gender = new FormControl('nam', [Validators.required]);
@@ -52,13 +85,13 @@ export class AddChildPage implements OnInit {
     this.weight = new FormControl('', [
       Validators.required,
       Validators.max(200),
-      Validators.min(0),
+      Validators.min(0.01),
     ]);
 
     this.height = new FormControl('', [
       Validators.required,
-      Validators.max(200),
-      Validators.min(10),
+      Validators.max(300),
+      Validators.min(0.01),
     ]);
 
     this.dob = new FormControl(format(new Date(), 'yyyy-MM-dd'), [

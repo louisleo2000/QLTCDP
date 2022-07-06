@@ -28,7 +28,7 @@ h4 {
 .bg-white {
   background-color: white;
 }
-ion-item {
+ion-item .con {
   border-radius: 25px;
   margin-top: 5px;
 }
@@ -57,4 +57,15 @@ a {
 }
 .item.sc-ion-label-md-hl,.item.sc-ion-label-md-h{
   color: white
+}
+
+ion-modal.datetime-picker {
+  --width: 290px;
+  --height: 382px;
+  --border-radius: 8px;
+}
+
+ion-modal ion-datetime {
+  height: 382px;
+
 }

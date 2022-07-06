@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package io.longlwu.qltc;
 
 import com.getcapacitor.BridgeActivity;
 

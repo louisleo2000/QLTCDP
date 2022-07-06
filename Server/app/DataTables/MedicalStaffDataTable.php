@@ -78,7 +78,7 @@ class MedicalStaffDataTable extends DataTable
                             // 'className' => 'bg-warning',
                         ]
                     )
-                    ->select('single')
+                    ->select('os')
                     ->language(config('app.datatableLanguage'));
     }
 
