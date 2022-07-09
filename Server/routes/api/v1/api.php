@@ -4,8 +4,11 @@ use App\DataTables\ScheduleDataTable;
 use App\Http\Controllers\api\v1\AuthController;
 use App\Http\Controllers\api\v1\ChildController;
 use App\Http\Controllers\api\v1\ParentController;
+use App\Http\Controllers\api\v1\PushNotifycationController;
 use App\Http\Controllers\api\v1\ScheduleController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
+use App\Http\Controllers\NotificationController;
+use App\Services\Notification\FcmService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -30,6 +33,8 @@ Route::prefix('/auth')->group(function () {
     Route::middleware('auth:api')->get('/me', [AuthController::class, 'me']);
     Route::middleware('auth:api')->get('/logout', [AuthController::class, 'logout']);
     Route::post('/forgot-password',  [PasswordResetLinkController::class, 'store'])->middleware('guest:api');
+    // Route::post('/reset-password', [PasswordResetLinkController::class, 'update'])->middleware('guest:api');
+    Route::post('/save-firetoken', [PushNotifycationController::class, 'store'])->middleware('guest:api');
 });
 Route::prefix('/child')->group(function () {
 
@@ -43,5 +48,10 @@ Route::prefix('/child')->group(function () {
 
 Route::prefix('/schedule')->group(function () {
     Route::middleware('auth:api')->get('/all', [ScheduleController::class,'indexAPI'])->name('all');
+    // Route::post('/parent', [ParentController::class,'store']);
+});
+
+Route::prefix('/notification')->group(function () {
+    Route::get('/send', [NotificationController::class,'sendMessage'])->name('notification.send');
     // Route::post('/parent', [ParentController::class,'store']);
 });

@@ -11,6 +11,7 @@ import { Capacitor } from '@capacitor/core';
 })
 export class Tab3Page {
   currentUser;
+  defaultImage = './../../assets/icon/user.png';
   darkmode: boolean = false;
   isPushNotificationsAvailable =
     Capacitor.isPluginAvailable('PushNotifications');

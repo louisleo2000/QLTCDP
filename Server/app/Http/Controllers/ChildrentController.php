@@ -11,7 +11,7 @@ class ChildrentController extends Controller
     public function index(ChildrentDataTable $dataTable)
     {
         
-        $data =['title' => 'Quản lý trẻ em'];
+        $data =['title' => 'Quản lý thông tin trẻ em'];
         return  $dataTable->render('pages.childrent',$data);
     }
     public function store(ChildrentDataTableEditor $editor)

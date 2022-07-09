@@ -6,6 +6,7 @@ use App\Http\Controllers\api\v1\ParentController;
 use App\Http\Controllers\api\v1\ScheduleController;
 use App\Http\Controllers\api\v1\VaccinationDetailsController;
 use App\Http\Controllers\ChildrentController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OAuthGGController;
 use App\Http\Controllers\ParentAdminController;
 use App\Http\Controllers\VaccineController;
@@ -22,14 +23,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', [ChildrentController::class,'index'])->middleware(['auth:web','admin:web'])->name('home');
+
 // Route::get('/', function () {
-//     return view('welcome');
-// })->name('home');
-
-Route::get('/', function () {
-    return view('dashboard');
-})->middleware(['auth:web','admin:web'])->name('home');
-
+//     return view('dashboard');
+// })->middleware(['auth:web','admin:web'])->name('home');
+// Route::resource('/', ChildrentController::class)->middleware(['auth:web','admin:web']);
 Route::get('/ouauth', [OAuthGGController::class,'index'])->name('oauth');
 
 Route::get('/dashboard', function () {
@@ -60,6 +59,7 @@ Route::resource('childrent', ChildrentController::class)->middleware(['auth:web'
 Route::resource('parentadmin', ParentAdminController::class)->middleware(['auth:web','admin:web']);
 Route::resource('medicalstaff', MedicalStaffController::class)->middleware(['auth:web','admin:web']);
 Route::resource('vaccine', VaccineController::class)->middleware(['auth:web','admin:web']);
+Route::resource('message', NotificationController::class)->middleware(['auth:web','admin:web']);
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();
 });

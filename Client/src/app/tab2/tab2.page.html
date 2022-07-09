@@ -25,7 +25,7 @@
     ></ion-searchbar>
 
     <ng-container *ngIf="allschedule.length >0">
-      <ion-item *ngFor="let item of allschedule | filter:searchText">
+      <ion-item *ngFor="let item of allschedule | filter:searchText" lines="none">
         <ion-card class="w-100" color="light">
           <ion-item-divider>
             <div class="col-7">

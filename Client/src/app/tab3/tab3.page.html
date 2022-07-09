@@ -9,7 +9,7 @@
     <ion-row class="ion-justify-content-center">
       <ion-avatar style="height: 200px; min-width: 200px">
         <img
-          src= "./../../assets/icon/user.png"
+        [defaultImage]="defaultImage" [lazyLoad]="currentUser.info.img"
           alt="avatar"
         />
       </ion-avatar>

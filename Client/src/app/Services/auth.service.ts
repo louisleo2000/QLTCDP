@@ -34,7 +34,7 @@ export class AuthService {
     this.httpService.post('auth/login', postData).subscribe(
       async (res: any) => {
         if (res.success) {
-          // console.log(res.success)
+          console.log(res.success)
           this.loadUser(res.token);
           await this.storageService.store('token', res.token);
           // await this.storageService.store(AuthConstants.AUTH, res.success)
